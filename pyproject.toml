@@ -1,0 +1,120 @@
+[tool.poetry]
+name = "wizard-template"
+version = "0.0.0" # no need to change, it is updated by poetry-version-plugin at build time
+description = "A template for a python project containing a library, tests, docs, and CI/CD."
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/fschuch/wizard-template"
+authors = ["Felipe N. Schuch <me@fschuch.com>"]
+packages = [{ include = "wizard_template" }]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Intended Audience :: Developers",
+]
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/fschuch/wizard-template/issues"
+"Changelog" = "https://github.com/fschuch/wizard-template/releases"
+"Documentation" = "https://fschuch.github.io/wizard-template/"
+
+[tool.poetry.dependencies]
+python = "^3.8.10"
+
+[tool.poetry.group.dev.dependencies]
+black = { extras = ["jupyter"], version = "^23.7.0" }
+codespell = "^2.2.5"
+gitpython = "^3.1.32"
+mypy = "^1.5.1"
+pre-commit = "^3.3.3"
+pytest = "^7.4.0"
+pytest-cov = "^4.1.0"
+pytest-random-order = "^1.1.0"
+ruff = "^0.0.285"
+taskipy = "^1.12.0"
+
+[tool.poetry.group.docs]
+optional = true
+
+[tool.poetry.group.docs.dependencies]
+docutils = "0.17.1"
+jupyter-book = "^0.15.1"
+sphinx-autobuild = "^2021.3.14"
+
+[tool.black]
+line-length = 79
+extend-exclude = "./docs/conf.py" # exclude auto generated file
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = [
+    "-s",
+    "--random-order",
+    "--cov=wizard_template",
+    "--doctest-modules",
+    "--doctest-glob='*.md'",
+    "--doctest-continue-on-failure",
+    "--doctest-report=ndiff",
+]
+
+[tool.coverage.run]
+parallel = true
+source = ["docs", "tests", "wizard_template"]
+
+[tool.coverage.report]
+fail_under = 90
+show_missing = true
+
+[tool.coverage.html]
+show_contexts = true
+
+[tool.ruff]
+line-length = 79
+select = ["A", "B", "C", "D", "E", "F", "FBT", "I", "N", "S", "SIM", "UP", "W"]
+extend-exclude = ["./docs/conf.py"] # exclude auto generated file
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"] # imported but unused
+"tests/*" = ["S101"]     # use of assert detected
+
+[tool.ruff.pydocstyle]
+convention = "numpy"
+
+[tool.mypy]
+pretty = true
+ignore_missing_imports = true
+exclude = ["docs/conf.py"] # exclude auto generated file
+
+[tool.codespell]
+skip = "./docs/conf.py,poetry.lock" # exclude auto generated file
+check-filenames = true
+
+[tool.taskipy.settings]
+runner = "poetry run"
+
+[tool.taskipy.tasks]
+pre_commit_install = "pre-commit install"
+test = "pytest"
+pre_lint = "task pre_commit_install"
+lint = "pre-commit run --all-files"
+qa = "task lint && task test && echo '✅ QA passed'"
+docs_update_config = "jupyter-book config sphinx docs"
+pre_docs = "poetry install --with docs"
+docs = "jupyter-book build docs --path-output build"
+pre_docs_serve = "task pre_docs"
+docs_serve = "sphinx-autobuild docs build/_build/html --open-browser --watch wizard_template"
+wizard = "python ./scripts/rename_project_content.py"
+post_wizard = "poetry remove gitpython"
+
+[tool.poetry-version-plugin]
+source = "git-tag"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

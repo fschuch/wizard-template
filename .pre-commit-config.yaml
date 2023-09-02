@@ -1,0 +1,45 @@
+default_language_version:
+  python: python
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-toml
+      - id: debug-statements
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: v0.0.275
+    hooks:
+      - id: ruff
+  - repo: https://github.com/psf/black
+    rev: 23.3.0
+    hooks:
+      - id: black
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: "v1.5.0"
+    hooks:
+      - id: mypy
+        exclude: docs/conf.py
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.2.4
+    hooks:
+    - id: codespell
+      additional_dependencies:
+        - tomli
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.35.0
+    hooks:
+      - id: markdownlint
+        args: ["--disable", "MD013", "MD033", "--"]
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.6.1
+    hooks:
+      - id: nbstripout
+
+ci:
+  autofix_commit_msg: "Auto format from pre-commit.com hooks"
+  autoupdate_commit_msg: "pre-commit autoupdate"

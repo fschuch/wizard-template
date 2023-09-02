@@ -1,0 +1,50 @@
+name: Docs
+
+# See:
+# https://jupyterbook.org/en/stable/publish/gh-pages.html
+on:
+  release:
+    types: [published] # trigger when new versions is published
+  workflow_dispatch: # allow manual triggering
+
+jobs:
+  deploy-doc:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Set up cache
+        uses: actions/cache@v3
+        id: cache
+        with:
+          path: .venv
+          key: ${{ runner.os }}-python-${{ env.pythonLocation }}-${{ hashFiles('pyproject.toml', 'poetry.lock') }}-docs-v1
+
+      - name: Install Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          python -m venv .venv
+          source .venv/bin/activate
+          python -m pip install poetry
+          python -m poetry install --with docs
+          deactivate
+
+      - name: Build the book
+        run: |
+          source .venv/bin/activate        
+          task docs
+
+      # Push the book's HTML to github-pages
+      - name: GitHub Pages action
+        uses: peaceiris/actions-gh-pages@v3.9.3
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/_build/html
