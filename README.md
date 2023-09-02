@@ -14,12 +14,12 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![CI](https://github.com/fschuch/wizard-template/actions/workflows/test-package.yaml/badge.svg)](https://github.com/fschuch/wizard-template/actions/workflows/test-package.yaml)
 
-This is a general-purpose template that aims to provide magical start on any Python project.
+This is a general-purpose template that aims to provide a magical start to any Python project.
 It includes the initial configuration of quality assurance tools, documentation, and automated actions.
 
-The template is powered by [Poetry](https://python-poetry.org/), which manages dependencies, builds, and publishes the package every time a new [release is created on GitHub](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository), thanks to the [publish-package](https://github.com/fschuch/wizard-template/blob/main/.github/workflows/publish-package.yaml) workflow. The release process is simplified, since the current versions is recovered automatically at building time by using [poetry-version-plugin](https://github.com/tiangolo/poetry-version-plugin/blob/main/pyproject.toml) and GitHub can generate the release notes automatically based on labels on each Pull Request ([release.yml](.github/release.yml)).
+The template is powered by [Poetry](https://python-poetry.org/), which manages dependencies, builds, and publishes the package every time a new [release is created on GitHub](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository), thanks to the [publish-package](https://github.com/fschuch/wizard-template/blob/main/.github/workflows/publish-package.yaml) workflow. The release process is simplified since the current version is recovered automatically at building time by using [poetry-version-plugin](https://github.com/tiangolo/poetry-version-plugin/blob/main/pyproject.toml) and GitHub can generate the release notes automatically based on labels on each Pull Request ([release.yml](.github/release.yml)).
 
-This approach ensures that releases do not modify the main branch, eliminating the need to constantly resolve merge conflicts on feature branches. The downside is that the new version number must be manually entered for each release, rather than using the command `poetry version`. However, this is a reasonable trade-off, since it does not impose any restrictions on the project's versioning scheme or branching model.
+This approach ensures that releases do not modify the main branch, eliminating the need to resolve merge conflicts on feature branches constantly. The downside is that the new version number must be manually entered for each release, rather than using the command `poetry version`. However, this is a reasonable trade-off, since it does not impose any restrictions on the project's versioning scheme or branching model.
 
 To ensure code quality, several tools are suggested and pre-configured:
 
@@ -31,7 +31,7 @@ To ensure code quality, several tools are suggested and pre-configured:
 
 In addition, [Git hooks](https://pre-commit.com/) can be used to guarantee consistency and leverage the aforementioned tools. The workflow [test-package.yaml](.github/workflows/test-package.yaml) runs them automatically for you.
 
-The documentation is initialized with [Jupyter Books](https://jupyterbook.org/en/stable/intro.html), providing a good approach for interactive tutorials.
+The documentation is initialized with [Jupyter Books](https://jupyterbook.org/en/stable/intro.html), providing a promising approach for interactive tutorials.
 
 ## Quick Start
 
@@ -87,7 +87,7 @@ You can see the available tasks by running:
 - It is highly recommended that you set up [branch protection rules](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/managing-a-branch-protection-rule).
 - Follow the instructions in [Configuring a publishing source for your GitHub Pages site](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site) to set up a publishing source for your GitHub Pages site. When using the automated workflow, the files will be located at the root (`/`) on the `gh-pages` branch. You will need the secret `TOKEN` with your [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) to make it work.
 - Refer to [Configuring issue templates for your repository](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository#configuring-the-template-chooser) to configure issue templates for your repository.
-- You can use CodeQL to identify vulnerabilities and errors in your code. Refer to [About CodeQL](https://docs.github.com/en/code-security/codeql/about-codeql) to learn more about it.
+- You can use CodeQL to identify vulnerabilities and errors in your code. Refer to [About CodeQL](https://codeql.github.com/docs/codeql-overview/about-codeql/) to learn more about it.
 
 ## Copyright and License
 
