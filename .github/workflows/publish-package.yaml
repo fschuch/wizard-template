@@ -41,6 +41,7 @@ jobs:
           TEST_PYPI_TOKEN: ${{ secrets.TEST_PYPI_TOKEN }}
         run: |
           if [[ -n "$TEST_PYPI_TOKEN" ]]; then
+            source .venv/bin/activate
             poetry config repositories.test-pypi https://test.pypi.org/legacy/
             poetry config pypi-token.test-pypi $TEST_PYPI_TOKEN
             poetry publish -r test-pypi
@@ -53,6 +54,7 @@ jobs:
           PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
         run: |
           if [[ -n "$PYPI_TOKEN" ]]; then
+            source .venv/bin/activate
             poetry config pypi-token.pypi $PYPI_TOKEN
             poetry publish
           else
