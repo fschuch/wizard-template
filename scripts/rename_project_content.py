@@ -14,10 +14,12 @@ TARGET_FILES = {"*.py", "*.md", "*.yaml", "*.toml", "LICENSE"}
 
 # Get the current working directory
 CWD = Path.cwd()
+THIS_FILE = Path(__file__)
 
 
 def main():
     """Rename the project content."""
+    print("The wizard will now prepare your project...")
     # Get info about the project if is running from
     repo = Repo(CWD)
     remote_url = repo.remotes.origin.url
@@ -45,7 +47,7 @@ def main():
         if any(p.startswith(".") for p in filepath.parts):
             continue
 
-        print(f"Replacing filepath={filepath.as_posix()}")
+        print(f"Replacing text on file {filepath.relative_to(CWD)}")
         filedata = filepath.read_text()
 
         # Replace the target string
@@ -56,13 +58,18 @@ def main():
         filepath.write_text(filedata)
 
     # Remove the script itself
-    Path(__file__).unlink()
+    print(f"Removing file {THIS_FILE.relative_to(CWD)}")
+    THIS_FILE.unlink()
 
     # Rename the directory
+    print(f"Renaming folder wizard_template to {project_name_underscore}")
     Path("wizard_template").rename(project_name_underscore)
 
     # Stage the changes
+    print("Staging changes...")
     repo.git.add(A=True)
+
+    print("Done!")
 
 
 if __name__ == "__main__":
