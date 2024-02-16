@@ -4,8 +4,12 @@ on:
     - cron: "0 0 * * 1" # midnight every Monday
   push:
     branches: [main]
+    paths:
+      - "**/*.md"
   pull_request:
     branches: [main]
+    paths:
+      - "**/*.md"
 
 jobs:
   check-links:
