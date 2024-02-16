@@ -11,7 +11,6 @@
 
 [![Poetry](https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json)](https://python-poetry.org/)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![CI](https://github.com/fschuch/wizard-template/actions/workflows/test-package.yaml/badge.svg)](https://github.com/fschuch/wizard-template/actions/workflows/test-package.yaml)
 
 This is a general-purpose template that aims to provide a magical start to any Python project.
@@ -23,9 +22,8 @@ This approach ensures that releases do not modify the main branch, eliminating t
 
 To ensure code quality, several tools are suggested and pre-configured:
 
-- [black](https://github.com/psf/black) as the code formatter
 - [mypy](https://mypy.readthedocs.io/en/stable/) for static type checking
-- [ruff](https://github.com/astral-sh/ruff) as the linter
+- [ruff](https://github.com/astral-sh/ruff) as the linter and code formatter
 - [codespell](https://github.com/codespell-project/codespell) to check spelling
 - [pytest](https://docs.pytest.org/en/7.4.x/) as the test engine
 

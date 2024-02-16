@@ -28,7 +28,6 @@ classifiers = [
 python = "^3.8.10"
 
 [tool.poetry.group.dev.dependencies]
-black = { extras = ["jupyter"], version = "^23.7.0" }
 codespell = "^2.2.5"
 gitpython = "^3.1.32"
 mypy = "^1.5.1"
@@ -36,7 +35,7 @@ pre-commit = "^3.3.3"
 pytest = "^7.4.0"
 pytest-cov = "^4.1.0"
 pytest-random-order = "^1.1.0"
-ruff = "^0.0.285"
+ruff = "^0.2.1"
 taskipy = "^1.12.0"
 
 [tool.poetry.group.docs]
@@ -46,10 +45,6 @@ optional = true
 docutils = "0.17.1"
 jupyter-book = "^0.15.1"
 sphinx-autobuild = "^2021.3.14"
-
-[tool.black]
-line-length = 79
-extend-exclude = "./docs/conf.py" # exclude auto generated file
 
 [tool.pytest.ini_options]
 minversion = "7.0"
@@ -77,11 +72,12 @@ show_contexts = true
 [tool.ruff]
 line-length = 79
 select = ["A", "B", "C", "D", "E", "F", "FBT", "I", "N", "S", "SIM", "UP", "W"]
-extend-exclude = ["./docs/conf.py"] # exclude auto generated file
+extend-exclude = ["./docs/conf.py"]
 
 [tool.ruff.per-file-ignores]
 "__init__.py" = ["F401"] # imported but unused
 "tests/*" = ["S101"]     # use of assert detected
+"*.ipynb" = ["E402"]     # module level import not at top of file
 
 [tool.ruff.pydocstyle]
 convention = "numpy"
@@ -89,10 +85,10 @@ convention = "numpy"
 [tool.mypy]
 pretty = true
 ignore_missing_imports = true
-exclude = ["docs/conf.py"] # exclude auto generated file
+exclude = ["docs/conf.py"]
 
 [tool.codespell]
-skip = "./docs/conf.py,poetry.lock" # exclude auto generated file
+skip = "./docs/conf.py,poetry.lock"
 check-filenames = true
 
 [tool.taskipy.settings]

@@ -1,10 +1,10 @@
 {
     "[python]": {
         "editor.formatOnSave": true,
-        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.defaultFormatter": "charliermarsh.ruff",
         "editor.codeActionsOnSave": {
-            "source.fixAll": true,
-            "source.organizeImports.ruff": true
+            "source.fixAll": "explicit",
+            "source.organizeImports.ruff": "explicit"
         }
     },
     "editor.rulers": [
