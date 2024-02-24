@@ -36,9 +36,7 @@ def main():
         username: re.compile(ORIGINAL_USERNAME),
         project_name: re.compile(ORIGINAL_PROJECT_NAME),
         project_name_dash: re.compile(ORIGINAL_PROJECT_NAME.replace("_", "-")),
-        project_name_underscore: re.compile(
-            ORIGINAL_PROJECT_NAME.replace("-", "_")
-        ),
+        project_name_underscore: re.compile(ORIGINAL_PROJECT_NAME.replace("-", "_")),
         "": re.compile(r"(post_)?wizard\s?=\s?\".+\""),
     }
 

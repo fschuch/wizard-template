@@ -1,0 +1,58 @@
+[version]
+source = "vcs"
+
+[build.hooks.vcs]
+version-file = "wizard_template/_version.py"
+
+[envs.default]
+description = "Base development environment"
+dependencies = [
+    "coverage[toml]",
+    "gitpython==3.1.32",
+    "pre-commit",
+    "pytest-cov",
+    "pytest",
+]
+
+[envs.default.scripts]
+_wizard = ["python ./scripts/rename_project_content.py"]
+pre-commit-install = "pre-commit install"
+pre-commit-uninstall = "pre-commit uninstall"
+check = "pre-commit run {args} --all-files"
+type = "check mypy"
+lint = "check ruff"
+format = "check ruff-format"
+test = "pytest --cov"
+test-no-cov = "pytest --no-cov"
+qa = ["check", "test", "echo '✅ QA passed'"]
+
+[envs.test]
+description = "Extended test environment"
+extra-dependencies = ["pytest-randomly", "pytest-rerunfailures", "pytest-xdist"]
+
+[envs.test.scripts]
+complete-suite = "test -n auto --reruns 7 --reruns-delay 1"
+
+[[envs.test.matrix]]
+python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
+
+[envs.docs]
+description = "Documentation environment"
+dependencies = ["docutils", "jupyter-book", "sphinx-autobuild"]
+detached = true
+
+[envs.docs.scripts]
+config = "jupyter-book config sphinx docs"
+build = "jupyter-book build docs --path-output build"
+serve = "sphinx-autobuild docs build/_build/html --open-browser --watch wizard_template"
+
+[envs.changelog]
+description = "Changelog handler"
+dependencies = ["towncrier"]
+skip-install = true
+detached = true
+
+[envs.changelog.scripts]
+build = "towncrier build"
+create = "towncrier create"
+check = "towncrier check"
