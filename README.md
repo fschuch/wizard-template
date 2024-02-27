@@ -194,8 +194,8 @@ Please, refer to [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) to und
   - `hatch run changelog:create --content 'A fancy log message' <issue-number>.<issue-type>.md`
   - `hatch run changelog:create --edit <issue-number>.<issue-type>.md` to open the editor to write the news fragment
   - Where `<issue-number>` is the GitHub issue number and `<issue-type>` is the issue type (e.g., `bug`, `feature`,
-  `enhancement`, `breaking`, `security`, `documentation`, `internal`, `performance`, `maintenance`, `deprecation`, `removal`,
-  `misc`). The configuration is on the file [towncrier.toml](towncrier.toml).
+    `enhancement`, `breaking`, `security`, `documentation`, `internal`, `performance`, `maintenance`, `deprecation`, `removal`,
+    `misc`). The configuration is on the file [towncrier.toml](towncrier.toml).
 - To check the news fragments, you can use:
   - `hatch run changelog:check`
 - To build the changelog file, you can use (it is also done automatically on the deployment workflow):
