@@ -8,12 +8,8 @@
         }
     },
     "editor.rulers": [
-        79
-    ],
-    // --no-cov needed so that breakpoints work:
-    // https://github.com/microsoft/vscode-python/issues/693
-    "python.testing.pytestArgs": [
-        "--no-cov"
+        80,
+        120
     ],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
@@ -23,9 +19,9 @@
         "**/.mypy_cache": true,
         "**/.pytest_cache": true,
         "**/.ruff_cache": true,
-        "**/.venv": true,
-        "**/build": true,
+        "**/.hatch": true,
+        "**/build": true
     },
     "cSpell.enabled": true,
-    "cSpell.language": "en",
+    "cSpell.language": "en"
 }
