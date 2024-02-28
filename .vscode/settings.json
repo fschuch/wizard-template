@@ -23,5 +23,6 @@
         "**/build": true
     },
     "cSpell.enabled": true,
-    "cSpell.language": "en"
+    "cSpell.language": "en",
+    "python.envFile": "${workspaceFolder}/.hatch/wizard-template"
 }

@@ -16,14 +16,14 @@ dependencies = [
 
 [envs.default.scripts]
 _wizard = ["python ./scripts/rename_project_content.py"]
-pre-commit-install = "pre-commit install"
-pre-commit-uninstall = "pre-commit uninstall"
+pre-commit-install = "pre-commit install {args}"
+pre-commit-uninstall = "pre-commit uninstall {args}"
 check = "pre-commit run {args} --all-files"
-type = "check mypy"
-lint = "check ruff"
-format = "check ruff-format"
-test = "pytest --cov"
-test-no-cov = "pytest --no-cov"
+type = "check mypy {args}"
+lint = "check ruff {args}"
+format = "check ruff-format {args}"
+test = "pytest --cov {args}"
+test-no-cov = "test --no-cov {args}"
 qa = ["check", "test", "echo '✅ QA passed'"]
 
 [envs.test]
@@ -31,7 +31,7 @@ description = "Extended test environment"
 extra-dependencies = ["pytest-randomly", "pytest-rerunfailures", "pytest-xdist"]
 
 [envs.test.scripts]
-complete-suite = "test -n auto --reruns 7 --reruns-delay 1"
+complete-suite = "test -n auto --reruns 7 --reruns-delay 1 {args}"
 
 [[envs.test.matrix]]
 python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
@@ -42,9 +42,9 @@ dependencies = ["docutils", "jupyter-book", "sphinx-autobuild"]
 detached = true
 
 [envs.docs.scripts]
-config = "jupyter-book config sphinx docs"
-build = "jupyter-book build docs --path-output build"
-serve = "sphinx-autobuild docs build/_build/html --open-browser --watch wizard_template"
+config = "jupyter-book config sphinx docs {args}"
+build = "jupyter-book build docs --path-output build {args}"
+serve = "sphinx-autobuild docs build/_build/html --open-browser --watch wizard_template {args}"
 
 [envs.changelog]
 description = "Changelog handler"
@@ -53,6 +53,7 @@ skip-install = true
 detached = true
 
 [envs.changelog.scripts]
-build = "towncrier build"
-create = "towncrier create"
-check = "towncrier check"
+build = "towncrier build {args}"
+draft = "build --draft {args}"
+create = "towncrier create {args}"
+check = "towncrier check {args}"

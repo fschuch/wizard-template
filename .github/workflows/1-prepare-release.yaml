@@ -1,11 +1,5 @@
 name: Prepare a Release
 
-# This action:
-#   - Is triggered manually in a workflow dispatch;
-#   - Update the changelog;
-#   - Create a new branch named prepare-release/<new_version>;
-#   - Open a PR to the base branch, so all the changes above can be reviewed.
-
 on:
   workflow_dispatch:
     inputs:

@@ -1,10 +1,5 @@
 name: Release on Tag
 
-# This action:
-#   - Is triggered when a new version is tagged;
-#   - Check if the package version match the repository tag;
-#   - Build and publish the packages to test-PyPI and/or PyPI.
-
 on:
   push:
     tags:
