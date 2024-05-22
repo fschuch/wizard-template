@@ -3,8 +3,9 @@ package = "wizard_template"
 directory = "changelog.d"
 filename = "CHANGELOG.md"
 start_string = "<!-- towncrier release notes start -->\n"
-title_format = "## [{version}](https://github.com/fschuch/wizard-template/releases/tag/{version}) - {project_date}"
+title_format = "## [{version}](https://github.com/fschuch/wizard-template/releases/tag/{version}) - {project_date}<!-- markdown-link-check-disable-line -->"
 issue_format = "[#{issue}](https://github.com/fschuch/wizard-template/issues/{issue})"
+underlines = ["", "", ""]
 
 [[tool.towncrier.type]]
 directory = "security"
@@ -34,6 +35,11 @@ showcontent = true
 [[tool.towncrier.type]]
 directory = "fixed"
 name = "Fixed"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "docs"
+name = "Documentation"
 showcontent = true
 
 [[tool.towncrier.type]]

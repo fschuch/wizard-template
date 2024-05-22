@@ -9,6 +9,7 @@ classifiers = [
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
+    "Private :: Do Not Upload",               # Prevent accidental upload to PyPI, remove before publishing
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
@@ -23,7 +24,7 @@ dependencies = []
 [project.urls]
 Source = "https://github.com/fschuch/wizard-template"
 Tracker = "https://github.com/fschuch/wizard-template/issues"
-Changelog = "https://github.com/fschuch/wizard-template/releases"
+Changelog = "https://github.com/fschuch/wizard-template/blob/main/CHANGELOG.md"
 Documentation = "https://fschuch.github.io/wizard-template/"
 
 [project.scripts]
@@ -32,18 +33,19 @@ Documentation = "https://fschuch.github.io/wizard-template/"
 minversion = "8.0"
 addopts = [
     "--doctest-modules",
-    "--doctest-glob='*.md'",
     "--doctest-continue-on-failure",
     "--doctest-report=ndiff",
 ]
 
 [tool.coverage.run]
 branch = true
-source_pkgs = ["wizard_template", "tests"]
+relative_files = true
+source = ["wizard_template", "tests"]
 omit = ["wizard_template/_version.py"]
 
 [tool.coverage.report]
 fail_under = 90
+precision = 2
 show_missing = true
 exclude_lines = ["no cov", "if __name__ == .__main__.:", "if TYPE_CHECKING:"]
 

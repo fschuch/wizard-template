@@ -39,40 +39,40 @@ You can check at anytime the environments and scripts that are prepared to suppo
 ```plain
 $ hatch env show --ascii
                                            Standalone
-+-----------+---------+-------------------+----------------------+------------------------------+
-| Name      | Type    | Dependencies      | Scripts              | Description                  |
-+===========+=========+===================+======================+==============================+
-| default   | virtual | coverage[toml]    | check                | Base development environment |
-|           |         | gitpython==3.1.32 | format               |                              |
-|           |         | pre-commit        | lint                 |                              |
-|           |         | pytest            | pre-commit-install   |                              |
-|           |         | pytest-cov        | pre-commit-uninstall |                              |
-|           |         |                   | qa                   |                              |
-|           |         |                   | test                 |                              |
-|           |         |                   | test-no-cov          |                              |
-|           |         |                   | type                 |                              |
-+-----------+---------+-------------------+----------------------+------------------------------+
-| docs      | virtual | docutils          | build                | Documentation environment    |
-|           |         | jupyter-book      | config               |                              |
-|           |         | sphinx-autobuild  | serve                |                              |
-+-----------+---------+-------------------+----------------------+------------------------------+
-| changelog | virtual | towncrier         | build                | Changelog handler            |
-|           |         |                   | check                |                              |
-|           |         |                   | create               |                              |
-|           |         |                   | draft                |                              |
-+-----------+---------+-------------------+----------------------+------------------------------+
++-----------+---------+------------------+----------------------+------------------------------+
+| Name      | Type    | Dependencies     | Scripts              | Description                  |
++===========+=========+==================+======================+==============================+
+| default   | virtual | coverage[toml]   | check                | Base development environment |
+|           |         | pre-commit       | format               |                              |
+|           |         | pytest           | lint                 |                              |
+|           |         | pytest-cov       | pre-commit-install   |                              |
+|           |         |                  | pre-commit-uninstall |                              |
+|           |         |                  | qa                   |                              |
+|           |         |                  | test                 |                              |
+|           |         |                  | test-no-cov          |                              |
+|           |         |                  | type                 |                              |
++-----------+---------+------------------+----------------------+------------------------------+
+| docs      | virtual | docutils         | build                | Documentation environment    |
+|           |         | jupyter-book     | config               |                              |
+|           |         | sphinx-autobuild | serve                |                              |
++-----------+---------+------------------+----------------------+------------------------------+
+| changelog | virtual | towncrier        | build                | Changelog handler            |
+|           |         |                  | check                |                              |
+|           |         |                  | create               |                              |
+|           |         |                  | draft                |                              |
++-----------+---------+------------------+----------------------+------------------------------+
                                                  Matrices
 +------+---------+-------------+----------------------+----------------------+---------------------------+
 | Name | Type    | Envs        | Dependencies         | Scripts              | Description               |
 +======+=========+=============+======================+======================+===========================+
 | test | virtual | test.py3.8  | coverage[toml]       | check                | Extended test environment |
-|      |         | test.py3.9  | gitpython==3.1.32    | complete-suite       |                           |
-|      |         | test.py3.10 | pre-commit           | format               |                           |
-|      |         | test.py3.11 | pytest               | lint                 |                           |
-|      |         | test.py3.12 | pytest-cov           | pre-commit-install   |                           |
-|      |         |             | pytest-randomly      | pre-commit-uninstall |                           |
-|      |         |             | pytest-rerunfailures | qa                   |                           |
-|      |         |             | pytest-xdist         | test                 |                           |
+|      |         | test.py3.9  | pre-commit           | extended             |                           |
+|      |         | test.py3.10 | pytest               | format               |                           |
+|      |         | test.py3.11 | pytest-cov           | lint                 |                           |
+|      |         | test.py3.12 | pytest-randomly      | pre-commit-install   |                           |
+|      |         |             | pytest-rerunfailures | pre-commit-uninstall |                           |
+|      |         |             | pytest-xdist         | qa                   |                           |
+|      |         |             |                      | test                 |                           |
 |      |         |             |                      | test-no-cov          |                           |
 |      |         |             |                      | type                 |                           |
 +------+---------+-------------+----------------------+----------------------+---------------------------+
@@ -89,7 +89,7 @@ $ hatch env show --ascii
    - I personally like to keep the Python environments within the project I'm working on, Hatch can be set to do so:
 
      ```bash
-     hatch config set dirs.env.virtual .hatch
+     hatch config set dirs.env.virtual .venv
      ```
 
 1. Clone your repository and make it your working directory.
@@ -194,17 +194,17 @@ $ hatch env show --ascii
 
 1. To run all the quality checks, you can use the command `hatch run qa`.
 
-1. To step up in the game, an extended test environment and the command `hatch run test:complete-suite` are available to
+1. To step up in the game, an extended test environment and the command `hatch run test:extended` are available to
    verify the package on different Python versions and under different conditions thanks to the pytest plugins:
 
    - `pytest-randomly` that randomizes the test order;
    - `pytest-rerunfailures` that re-runs tests to eliminate intermittent failures;
-   - `pytest-xdist` that parallelizes the test suite and reduce runtime;
+   - `pytest-xdist` that parallelizes the test suite and reduce runtime, to help the previous points that increase the workload;
    - The file [hatch.toml](hatch.toml) includes configuration for them.
 
 #### Continuous Integration
 
-- The workflow [test-package.yaml](.github/workflows/test-package.yaml) performs the verifications on every push and pull request.
+- The workflow [ci.yaml](.github/workflows/ci.yaml) performs the verifications on every push and pull request.
 - The workflow [update-pre-commits.yaml](.github/workflows/update-pre-commits.yaml) is scheduled to run weekly to ensure the pre-commit hooks are up-to-date.
 - Dependabot is enabled to keep the dependencies up-to-date ([dependabot.yml](.github/dependabot.yml)).
 
@@ -231,7 +231,7 @@ In this way, there is no need to manually update the version on the codebase. Yo
 On the deployment workflow, the version is recovered from the tag and used to build the package.
 
 The downside is that the new version number must be manually entered for each release, rather than using the command `hatch version` to bump it up.
-However, this is a reasonable trade-off, since it does not impose any restrictions on the project's versioning scheme or branching model.
+However, this is a reasonable trade-off, since it does not impose any restrictions on the project's versioning scheme nor branching model.
 
 ### Documentation
 
@@ -278,12 +278,9 @@ are detailed below. It is a general-purpose workflow that can be used for any br
 
 1. **Publish on Tag**
 
-   When the tag is pushed, the [3-publish-on-tag.yaml](.github/workflows/3-publish-on-tag.yaml) action is triggered.
-   It builds and publishes the packages on Test PyPI or PyPI and creates a new Release entry here on GitHub.
+   When a new version tag is pushed, the action [ci.yaml](.github/workflows/ci.yaml) proceeds to publish it to PyPi if all the checks pass.
 
-   - Obtain a [Test PyPI token](https://test.pypi.org) and/or [PyPI token](https://pypi.org) (note that they are not the same)
-     and [add them as secrets to your repository](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions)
-     (`TEST_PYPI_TOKEN` and `PYPI_TOKEN`, respectively) so that the deployment workflow will function.
+   - [Adding a trusted publisher to an existing PyPI project](https://docs.pypi.org/trusted-publishers/adding-a-publisher/)
 
 ### Miscellaneous
 
@@ -299,6 +296,9 @@ These annotations are useful for static type checkers, which are tools that help
 ## Next steps
 
 - You can now customize the codebase to best suit your project.
+- Take a look on the classifiers to set on the [pyproject.toml](pyproject.toml) file:
+  - <https://pypi.org/classifiers/>
+  - <https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#writing-pyproject-toml>
 - Don't forget to review the [LICENSE](./LICENSE) file on your repository to let others know how they can legally use your project.
 - It is highly recommended that you set up [branch protection rules](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/managing-a-branch-protection-rule).
 - Refer to [Configuring issue templates for your repository](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository#configuring-the-template-chooser) to configure issue templates for your repository.

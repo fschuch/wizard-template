@@ -10,34 +10,26 @@ on:
 jobs:
   prepare-for-release:
     runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ github.event.inputs.version }}
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-
-      - name: Set up pip cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-python-${{ matrix.python-version }}-${{ hashFiles('pyproject.toml', 'hatch.toml') }}-deploy-v1
-          restore-keys: ${{ runner.os }}-python-${{ matrix.python-version }}-
-
-      - name: Ensure latest pip
-        run: python -m pip install --upgrade pip
+          cache: "pip"
 
       - name: Install Hatch
         run: python -m pip install hatch
 
       - name: Update Changelog
-        run: hatch run changelog:build --yes --version ${{ github.event.inputs.version }}
+        run: hatch run changelog:build --yes --version --version "$VERSION"
 
-      - uses: peter-evans/create-pull-request@v4
+      - uses: peter-evans/create-pull-request@v6
         name: Create Pull Request
         id: cpr
         with:
-          token: ${{ secrets.TOKEN }}
           commit-message: "Prepared release ${{ github.event.inputs.version }}"
           branch: "prepare-release/${{ github.event.inputs.version }}"
           title: "Release ${{ github.event.inputs.version }}"
