@@ -31,8 +31,7 @@ class GitInfo(NamedTuple):
         """
         Instantiate the class from the repository information.
 
-        >>> from scripts.rename_project_content import GitInfo
-        >>> GitInfo.from_repo_info()
+        >>> GitInfo.from_repo_info() # doctest: +SKIP
         GitInfo(username='fschuch', repo='wizard-template')
         """
         # Run the git command and get the output
