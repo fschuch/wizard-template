@@ -27,12 +27,12 @@ jobs:
 
   test:
     needs: qa
-    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
 
@@ -56,7 +56,7 @@ jobs:
           path: coverage.*.xml
 
   build:
-    needs: tests
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
