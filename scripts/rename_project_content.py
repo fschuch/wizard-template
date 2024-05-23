@@ -1,4 +1,5 @@
 """Helper script to rename the project content after cloning the template."""
+
 from __future__ import annotations
 
 import itertools
@@ -30,6 +31,7 @@ class GitInfo(NamedTuple):
         """
         Instantiate the class from the repository information.
 
+        >>> __test__ = {"GitInfo": GitInfo}
         >>> GitInfo.from_repo_info()
         GitInfo(username='fschuch', repo='wizard-template')
         """
