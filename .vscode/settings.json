@@ -18,7 +18,7 @@
         "**/.mypy_cache": true,
         "**/.pytest_cache": true,
         "**/.ruff_cache": true,
-        "**/.hatch": true,
+        "**/.venv": true,
         "**/build": true
     },
     "cSpell.enabled": true,

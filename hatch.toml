@@ -5,6 +5,7 @@ source = "vcs"
 version-file = "wizard_template/_version.py"
 
 [envs.default]
+installer = "uv"
 description = "Base development environment"
 dependencies = ["coverage[toml]", "pre-commit", "pytest-cov", "pytest"]
 
@@ -32,9 +33,9 @@ python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
 
 [envs.docs]
 description = "Documentation environment"
+template = "docs"
+install = true
 dependencies = ["docutils", "jupyter-book", "sphinx-autobuild"]
-detached = true
-skip-install = false
 
 [envs.docs.scripts]
 config = "jupyter-book config sphinx docs {args}"
@@ -47,7 +48,8 @@ serve = [
 [envs.changelog]
 description = "Changelog handler"
 dependencies = ["towncrier"]
-detached = true
+template = "changelog"
+install = true
 
 [envs.changelog.scripts]
 build = "towncrier build {args}"

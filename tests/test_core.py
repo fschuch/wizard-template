@@ -1,4 +1,5 @@
 """Test the core module."""
+
 import pytest
 
 from wizard_template.core import demo_function

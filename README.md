@@ -204,7 +204,7 @@ $ hatch env show --ascii
 
 #### Continuous Integration
 
-- The workflow [ci.yaml](.github/workflows/ci.yaml) performs the verifications on every push and pull request.
+- The workflow [ci.yaml](.github/workflows/ci.yaml) performs the verifications on every push and pull request, and deploys the package if running from a valid tag.
 - The workflow [update-pre-commits.yaml](.github/workflows/update-pre-commits.yaml) is scheduled to run weekly to ensure the pre-commit hooks are up-to-date.
 - Dependabot is enabled to keep the dependencies up-to-date ([dependabot.yml](.github/dependabot.yml)).
 
@@ -238,7 +238,7 @@ However, this is a reasonable trade-off, since it does not impose any restrictio
 The template includes a documentation environment that uses [Jupyter Books](https://jupyterbook.org/en/stable/intro.html)
 to provide a promising approach for interactive tutorials. The documentation source is on the `docs` folder and can be
 served locally with `hatch run docs:serve`, it will be available on <http://127.0.0.1:8000>.
-The documentation is also built automatically on the deployment workflow [publish-docs.yaml](.github/workflows/publish-docs.yaml).
+The documentation is also built automatically on the deployment workflow [docs.yaml](.github/workflows/docs.yaml).
 
 - Follow the instructions in [Configuring a publishing source for your GitHub Pages site](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site) to set up a publishing source for your GitHub Pages site. When using the automated workflow, the files will be located at the root (`/`) on the `gh-pages` branch. You will need the secret `TOKEN` with your [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) to make it work.
 

@@ -17,12 +17,19 @@ on:
   schedule:
     - cron: "0 0 * * 1" # midnight every Monday
 
+concurrency:
+  group: "${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}"
+  cancel-in-progress: true
+
 jobs:
   qa:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
       - uses: pre-commit/action@v3.0.1
 
   test:
@@ -47,7 +54,7 @@ jobs:
 
       - name: Run tests
         run: |
-          hatch run +py=${{ matrix.python-version }} test:extended --cov-report=xml:coverage.${{ runner.os }}.${{ matrix.python-version }}.xml
+          hatch run +py=${{ matrix.python-version }} test:extended --cov-report=xml:coverage.${{ matrix.os }}.${{ matrix.python-version }}.xml
 
       - name: Upload coverage data
         uses: actions/upload-artifact@v4
