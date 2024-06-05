@@ -28,7 +28,7 @@ To ensure code quality, several tools are suggested and pre-configured:
 - [ruff](https://github.com/astral-sh/ruff) as the linter and code formatter
 - [codespell](https://github.com/codespell-project/codespell) to check spelling
 - [pytest](https://docs.pytest.org/en/7.4.x/) as the test engine
-- [towncrier](https://towncrier.readthedocs.io/en/stable/index.html) handles the changelog file
+- [Automatically generated release notes](https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes) from GitHub to handle the changelog
 
 In addition, [Git hooks](https://pre-commit.com/) can be used to guarantee consistency and leverage the aforementioned tools. The workflow [test-package.yaml](.github/workflows/test-package.yaml) runs them automatically for you.
 
@@ -38,29 +38,24 @@ You can check at anytime the environments and scripts that are prepared to suppo
 
 ```plain
 $ hatch env show --ascii
-                                           Standalone
-+-----------+---------+------------------+----------------------+------------------------------+
-| Name      | Type    | Dependencies     | Scripts              | Description                  |
-+===========+=========+==================+======================+==============================+
-| default   | virtual | coverage[toml]   | check                | Base development environment |
-|           |         | pre-commit       | format               |                              |
-|           |         | pytest           | lint                 |                              |
-|           |         | pytest-cov       | pre-commit-install   |                              |
-|           |         |                  | pre-commit-uninstall |                              |
-|           |         |                  | qa                   |                              |
-|           |         |                  | test                 |                              |
-|           |         |                  | test-no-cov          |                              |
-|           |         |                  | type                 |                              |
-+-----------+---------+------------------+----------------------+------------------------------+
-| docs      | virtual | docutils         | build                | Documentation environment    |
-|           |         | jupyter-book     | config               |                              |
-|           |         | sphinx-autobuild | serve                |                              |
-+-----------+---------+------------------+----------------------+------------------------------+
-| changelog | virtual | towncrier        | build                | Changelog handler            |
-|           |         |                  | check                |                              |
-|           |         |                  | create               |                              |
-|           |         |                  | draft                |                              |
-+-----------+---------+------------------+----------------------+------------------------------+
+                                          Standalone
++---------+---------+------------------+----------------------+------------------------------+
+| Name    | Type    | Dependencies     | Scripts              | Description                  |
++=========+=========+==================+======================+==============================+
+| default | virtual | coverage[toml]   | check                | Base development environment |
+|         |         | pre-commit       | format               |                              |
+|         |         | pytest           | lint                 |                              |
+|         |         | pytest-cov       | pre-commit-install   |                              |
+|         |         |                  | pre-commit-uninstall |                              |
+|         |         |                  | qa                   |                              |
+|         |         |                  | test                 |                              |
+|         |         |                  | test-no-cov          |                              |
+|         |         |                  | type                 |                              |
++---------+---------+------------------+----------------------+------------------------------+
+| docs    | virtual | docutils         | build                | Documentation environment    |
+|         |         | jupyter-book     | config               |                              |
+|         |         | sphinx-autobuild | serve                |                              |
++---------+---------+------------------+----------------------+------------------------------+
                                                  Matrices
 +------+---------+-------------+----------------------+----------------------+---------------------------+
 | Name | Type    | Envs        | Dependencies         | Scripts              | Description               |

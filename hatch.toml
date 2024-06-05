@@ -35,6 +35,7 @@ python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
 description = "Documentation environment"
 template = "docs"
 install = true
+installer = "uv"
 dependencies = ["docutils", "jupyter-book", "sphinx-autobuild"]
 
 [envs.docs.scripts]
@@ -44,15 +45,3 @@ serve = [
     "config",
     "sphinx-autobuild docs build/_build/html --open-browser --watch wizard_template {args}",
 ]
-
-[envs.changelog]
-description = "Changelog handler"
-dependencies = ["towncrier"]
-template = "changelog"
-install = true
-
-[envs.changelog.scripts]
-build = "towncrier build {args}"
-draft = "build --draft {args}"
-create = "towncrier create {args}"
-check = "towncrier check {args}"
