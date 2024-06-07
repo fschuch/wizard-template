@@ -3,7 +3,12 @@
 
 format: jb-book
 root: intro
-chapters:
-  - file: markdown
-  - file: notebooks
-  - file: markdown-notebooks
+parts:
+  - caption: Base
+    chapters:
+      - file: markdown
+      - file: notebooks
+      - file: markdown-notebooks
+  - caption: References
+    chapters:
+      - file: api-reference.rst

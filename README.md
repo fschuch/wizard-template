@@ -7,18 +7,18 @@
     <em>Let the wizard do the heavy lifting so you can focus on your craft</em>
 </p>
 
-______________________________________________________________________
+<p align="center">
 
-[![QA](https://github.com/fschuch/wizard-template/actions/workflows/test-package.yaml/badge.svg)](https://github.com/fschuch/wizard-template/actions/workflows/test-package.yaml)
-[![Hatch project](https://img.shields.io/badge/%F0%9F%A5%9A-Hatch-4051b5.svg)](https://github.com/pypa/hatch)
-[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
-[![Checked with mypy](https://www.mypy-lang.org/static/mypy_badge.svg)](https://mypy-lang.org/)
-[![License - MIT](https://img.shields.io/badge/license-MIT-9400d3.svg)](https://spdx.org/licenses/)
+|       |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CI/CD | [![CI](https://github.com/fschuch/wizard-template/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/fschuch/wizard-template/actions/workflows/ci.yaml) [![Docs](https://github.com/fschuch/wizard-template/actions/workflows/docs.yaml/badge.svg?branch=main)](https://docs.fschuch.com/wizard-template) [![CodeQL](https://github.com/fschuch/wizard-template/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/fschuch/wizard-template/actions/workflows/github-code-scanning/codeql)                                                                                                                                                                                |
+| Meta  | [![Wizard Template](https://img.shields.io/badge/Wizard-Template-%23447CAA)](https://github.com/fschuch/wizard-template) [![Checked with mypy](https://www.mypy-lang.org/static/mypy_badge.svg)](https://mypy-lang.org/) [![Hatch project](https://img.shields.io/badge/%F0%9F%A5%9A-Hatch-4051b5.svg)](https://github.com/pypa/hatch) [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff) ![GitHub License](https://img.shields.io/github/license/fschuch/wizard-template?color=blue) [![EffVer Versioning](https://img.shields.io/badge/version_scheme-EffVer-0097a7)](https://jacobtomlinson.dev/effver) |
 
-This is a general-purpose template that aims to provide a magical start to any Python project.
-It includes the initial configuration of quality assurance tools, documentation, and automated actions to deploy a Python package.
+</p>
 
 ## Overview
+
+This is a general-purpose template that aims to provide a magical start to any Python project. It includes the initial configuration of quality assurance tools, documentation, and automated actions to deploy a Python package.
 
 The template is powered by [Hatch](https://hatch.pypa.io), which manages Python installations, virtual environments, dependencies, besides builds,
 and deploys the project to [PyPI](https://pypi.org). See [Why Hatch?](https://hatch.pypa.io/latest/why/) for more details.
@@ -28,9 +28,8 @@ To ensure code quality, several tools are suggested and pre-configured:
 - [ruff](https://github.com/astral-sh/ruff) as the linter and code formatter
 - [codespell](https://github.com/codespell-project/codespell) to check spelling
 - [pytest](https://docs.pytest.org/en/7.4.x/) as the test engine
-- [Automatically generated release notes](https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes) from GitHub to handle the changelog
 
-In addition, [Git hooks](https://pre-commit.com/) can be used to guarantee consistency and leverage the aforementioned tools. The workflow [test-package.yaml](.github/workflows/test-package.yaml) runs them automatically for you.
+In addition, [Git hooks](https://pre-commit.com/) can be used to guarantee consistency and leverage the aforementioned tools. The workflow [ci.yaml](.github/workflows/ci.yaml) runs them automatically for you.
 
 The documentation is initialized with [Jupyter Books](https://jupyterbook.org/en/stable/intro.html), providing a promising approach for interactive tutorials.
 
@@ -150,7 +149,7 @@ $ hatch env show --ascii
    hatch run _wizard
    ```
 
-1. You can now review the changes, stage, and commit them on your repo. Run `hatch run qa` another time to assert everything is still all right.
+1. Run `hatch run qa` another time to assert everything is still all right. You can now review the changes, stage, and commit them on your repo.
 
 ### Dependencies
 
@@ -159,11 +158,11 @@ $ hatch env show --ascii
 1. Project dependencies are managed on the file [pyproject.toml](pyproject.toml), refer to
    [Dependency configuration](https://hatch.pypa.io/latest/config/dependency/) for more details on the topic.
 
-1. Development dependencies, environments, and maintenance scripts are defined on the file [hatch.toml](hatch.toml). The file is self-explanatory, and you can refer to [Environment configuration](https://hatch.pypa.io/latest/config/environment/) for more details.
+1. Hatch specific configuration covering the development dependencies, environments, and maintenance scripts are defined also on the file [pyproject.toml](pyproject.toml). You can refer to [Environment configuration](https://hatch.pypa.io/latest/config/environment/) for more details.
 
 1. To ensure quality standards on the codebase, [pre-commit](https://pre-commit.com) manages and runs the hooks configured on [.pre-commit-config.yaml](.pre-commit-config.yaml).
 
-   - `pre-commit` handles the installation of ruff, mypy, codespell, and others, on an isolated environment.
+   - `pre-commit` handles the installation of ruff, mypy, codespell, and others, on an isolated environments.
    - It is a good pick since many of the fixes can be done automatically at commit time just on the changed files.
    - These tools are not declared as development dependencies on the project to avoid duplication.
    - The action [update-pre-commits.yaml](.github/workflows/update-pre-commits.yaml) scheduled to run weekly to ensure
@@ -171,8 +170,8 @@ $ hatch env show --ascii
 
 ### Enforcing Code Quality
 
-1. As mentioned above, the [pre-commit](https://pre-commit.com) tool is used to enforce code quality. Even though it
-   performs checks on the changes for every commit when installed (`hatch run pre-commit-install`),
+1. As mentioned above, the [pre-commit](https://pre-commit.com) tool is used to enforce code quality standards.
+   Even though it performs checks on the changes for every commit when installed (`hatch run pre-commit-install`),
    it is a good practice to run the checks on the whole codebase from time to time (when a new hook is added or on Pull
    Requests). You can do so by running `hatch run check <hook-id>`, for instance `hatch run check nbstripout`.
    Some of them are available as scripts as a syntax sugar, like `hatch run lint`,
@@ -195,7 +194,7 @@ $ hatch env show --ascii
    - `pytest-randomly` that randomizes the test order;
    - `pytest-rerunfailures` that re-runs tests to eliminate intermittent failures;
    - `pytest-xdist` that parallelizes the test suite and reduce runtime, to help the previous points that increase the workload;
-   - The file [hatch.toml](hatch.toml) includes configuration for them.
+   - The file [pyproject.toml](pyproject.toml) includes configuration for them.
 
 #### Continuous Integration
 
@@ -205,24 +204,16 @@ $ hatch env show --ascii
 
 ### Managing the Changelog
 
-Please, refer to [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) to understand the format and the purpose of the changelog file. Refer to [How to best handle conflicts when everyone commits to CHANGELOG.md file?](https://www.reddit.com/r/git/comments/pgwabc/comment/hbfbjsh/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button) for more details on why a dedicate tool like [towncrier](https://towncrier.readthedocs.io/en/stable/index.html) is used to handle "news fragments" and generate the changelog file. By doing so, the changelog file is always up-to-date and the merge conflicts are minimized.
+The template relies on [Automatically generated release notes](https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes) from GitHub to handle the changelog.
+Refer to [Managing labels](https://docs.github.com/en/issues/using-labels-and-milestones-to-track-work/managing-labels) and add the labels from [release.yml](.github/release.yml) to automatically organize your entries. This is a nice fit for [Managing releases in a repository](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository).
 
-- To produce news fragments to include on Pull Requests, you can use:
-  - `hatch run changelog:create --content 'A fancy log message' <issue-number>.<issue-type>.md`
-  - `hatch run changelog:create --edit <issue-number>.<issue-type>.md` to open the editor to write the news fragment
-  - Where `<issue-number>` is the GitHub issue number and `<issue-type>` is the issue type (e.g., `security`, `removed`, `deprecated`, `added`, `changed`, `fixed`, and `misc`). Use `+` as the issue number if you do not have an issue for your change. The configuration is on the file [towncrier.toml](towncrier.toml).
-- To check the news fragments, you can use:
-  - `hatch run changelog:check`
-- To see a draft of the new changelog entry, you can use:
-  - `hatch run changelog:draft`
-- To build the changelog file, you can use (it is also done automatically on the deployment workflow):
-  - `hatch run changelog:build`
+Some may argue about the importance of [Keeping a Changelog](https://keepachangelog.com/en/1.0.0/) on a dedicated file, but that results in frequent conflicts and merge issues to be solved when working with feature branches in parallel. The GitHub release notes are a good compromise, as they are automatically generated and can be edited before the release. Notice good Pull Request titles and small incremental changes are key to a good changelog.
 
 ### Managing the Version Number
 
-Also aiming to minimize merge conflicts, the version in the project is set dynamically by [hatch-vcs](https://github.com/ofek/hatch-vcs).
+The version in the project is set dynamically by [hatch-vcs](https://github.com/ofek/hatch-vcs).
 At installation and build time, the version is recovered from the version control system an exported to the file `wizard_template/_version.py`.
-In this way, there is no need to manually update the version on the codebase. You can use the command `hatch version` to check the current version.
+In this way, there is no need to keep the version hard-coded on the codebase. You can use the command `hatch version` to check the current version.
 On the deployment workflow, the version is recovered from the tag and used to build the package.
 
 The downside is that the new version number must be manually entered for each release, rather than using the command `hatch version` to bump it up.
@@ -235,47 +226,19 @@ to provide a promising approach for interactive tutorials. The documentation sou
 served locally with `hatch run docs:serve`, it will be available on <http://127.0.0.1:8000>.
 The documentation is also built automatically on the deployment workflow [docs.yaml](.github/workflows/docs.yaml).
 
+- Modules and functions docstrings are used to generate the documentation thanks to the [sphinx-autodoc](https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html) and [sphinx-napoleon](https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html) packages.
+
 - Follow the instructions in [Configuring a publishing source for your GitHub Pages site](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site) to set up a publishing source for your GitHub Pages site. When using the automated workflow, the files will be located at the root (`/`) on the `gh-pages` branch. You will need the secret `TOKEN` with your [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) to make it work.
 
 ### Publishing
 
-The package can be published to PyPI in an automated workflow by three linked GitHub Actions that
-are detailed below. It is a general-purpose workflow that can be used for any branch model and versioning strategy.
+The package can be published to PyPI in a general-purpose workflow that can be used for any branch model and versioning strategy.
 
-1. **Prepare a release**
+The action [ci.yaml](.github/workflows/ci.yaml) is triggered to publish the package to PyPi when any valid tag is pushed to the repository. The tag matching pattern is set to `v*.*.*`, for instance, `1.2.3`, `0.0.1rc2`, `2023.2.0`, etc. Notice all previous steps on CI are executed before the deployment, including static analysis and tests.
 
-   The first action involved in publication is the [1-prepare-release.yaml](.github/workflows/1-prepare-release.yaml)
-   action. It is triggered manually on github through a "workflow dispatch event" when a new version is to be released.
-   To do so, go to the "Actions" tab on your repository, click on "Run workflow" and select the "Prepare a release" workflow.
-   It allows the user to select the branch to release from (often `main`, but release branches are also supported `release/*`) and the
-   complete version number to release (e.g., `1.2.3`, `0.0.1.rc2`, `2023.2.0`, etc). The action then:
+- Refer to [Adding a trusted publisher to an existing PyPI project](https://docs.pypi.org/trusted-publishers/adding-a-publisher/) to integrate the package with the PyPI project.
 
-   - Process the pending news fragments and add them to the changelog file.
-   - Creates a new branch named `prepare-release/<version>`.
-   - Opens a pull request titled `Release <version>`.
-
-   In this way, all the changes above can be reviewed in the PR before proceeding with the release
-   and all quality assurance tests are executed one more time. At this point:
-
-   - **Double-check the branch** the PR wants to merge into.
-   - **Double-check the version number**. Close the PR and start over if necessary.
-   - **Double-check the changelog**. Modify the file on the PR if any of the entries
-     need more clarification or are incorrect.
-
-   If everything is correct and the changes are approved, merge the PR.
-   The remaining steps of the workflow are chained automatically.
-
-1. **Create a new tag**
-
-   Once the PR created on the step 1 is merged into the `main` or `release/*` branch,
-   [2-tag-release.yaml](.github/workflows/2-tag-release.yaml) action is triggered.
-   It creates and pushes a new git tag to GitHub named `<version>`.
-
-1. **Publish on Tag**
-
-   When a new version tag is pushed, the action [ci.yaml](.github/workflows/ci.yaml) proceeds to publish it to PyPi if all the checks pass.
-
-   - [Adding a trusted publisher to an existing PyPI project](https://docs.pypi.org/trusted-publishers/adding-a-publisher/)
+The process can also be triggered when a Release creates a new tag on your repo, so it sinergizes with the GitHub release notes cited above on the Changelog management.
 
 ### Miscellaneous
 

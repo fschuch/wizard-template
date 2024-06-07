@@ -1,16 +1,15 @@
-name: ci
+name: CI
 
 on:
   push:
     tags:
-      - "[0-9].[0-9].[0-9]*"
+      - "v*.*.*"
     branches:
       - "main"
       - "release/**"
   pull_request:
     paths:
       - .github/workflows/ci.yaml
-      - hatch.toml
       - pyproject.toml
       - tests/**
       - wizard_template/**
@@ -23,6 +22,7 @@ concurrency:
 
 jobs:
   qa:
+    # Static code analysis and linting powered by pre-commit
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -86,7 +86,7 @@ jobs:
 
   release:
     needs: build
-    # upload to PyPI on every tag
+    # upload to PyPI on every tag and ensure it does not run on forks
     if: github.event_name == 'push' && github.ref_type == 'tag' && github.repository == 'fschuch/wizard_template'
     runs-on: ubuntu-latest
     environment:

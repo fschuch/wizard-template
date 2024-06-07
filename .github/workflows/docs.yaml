@@ -5,7 +5,7 @@ name: Docs
 on:
   push:
     tags:
-      - "[0-9].[0-9].[0-9]*"
+      - "v*.*.*"
     branches:
       - main
       - release/**
@@ -14,7 +14,6 @@ on:
       - .github/workflows/docs.yaml
       - docs/**
       - wizard_template/**
-      - hatch.toml
       - pyproject.toml
 
 jobs:

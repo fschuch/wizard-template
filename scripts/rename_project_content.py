@@ -19,6 +19,16 @@ TARGET_FILES = {"*.py", "*.md", "*.yaml", "*.toml", "LICENSE"}
 CWD = Path.cwd()
 THIS_FILE = Path(__file__)
 
+COMMUNITY_BADGE_TEMPLATE = (
+    "[![Wizard Template]"
+    "(https://img.shields.io/badge/Wizard-Template-%23447CAA)]"
+    "(https://github.com/{}/{})"
+)
+
+ORIGINAL_BADGE = COMMUNITY_BADGE_TEMPLATE.format(
+    ORIGINAL_USERNAME, ORIGINAL_PROJECT_NAME
+)
+
 
 class GitInfo(NamedTuple):
     """Named tuple to store the git info."""
@@ -49,7 +59,7 @@ def from_repo_info_with_fallback() -> GitInfo:
     """Get the repository information."""
     try:
         return GitInfo.from_repo_info()
-    except ValueError:
+    except (ValueError, subprocess.CalledProcessError):
         print("Could not parse git URL, please enter the information manually.")
         username = input("Enter your username: ")
         repo = input("Enter your repo: ")
@@ -66,6 +76,8 @@ def main() -> None:
     # Prepare the project name variations
     project_name_dash = project_name.replace("_", "-")
     project_name_underscore = project_name.replace("-", "_")
+
+    tmp_badge = COMMUNITY_BADGE_TEMPLATE.format(username, project_name)
 
     # Map new values to the patterns to be replaced
     patterns = {
@@ -87,6 +99,9 @@ def main() -> None:
         # Replace the target string
         for new_value, pattern in patterns.items():
             filedata = pattern.sub(new_value, filedata)
+
+        # Revert back the badge to support the original project
+        filedata = filedata.replace(tmp_badge, ORIGINAL_BADGE)
 
         # Write the file out again
         filepath.write_text(filedata)

@@ -15,15 +15,18 @@ def demo_function(incoming_int: int) -> int:
 
     Args
     ----
-    incoming_int: The input to be doubled.
+    incoming_int
+        The input to be doubled
 
     Returns
     -------
-    The doubled input.
+    int
+        The doubled input
 
     Raises
     ------
-    TypeError: If the input is not an integer.
+    NotAnIntegerError
+        If tried with an invalid input
 
     Examples
     --------

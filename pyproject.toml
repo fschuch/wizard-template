@@ -1,6 +1,11 @@
+
+[build-system]
+requires = ["hatchling>=1.21.0", "hatch-vcs>=0.3.0"]
+build-backend = "hatchling.build"
+
 [project]
 name = "wizard-template"
-description = "A template for a python project containing a library, tests, docs, and CI/CD."
+description = "A template for a python project containing a package, tests, docs, and CI/CD."
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.8"
@@ -9,7 +14,6 @@ classifiers = [
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
-    "Private :: Do Not Upload",               # Prevent accidental upload to PyPI, remove before publishing
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
@@ -68,6 +72,49 @@ exclude = ["docs/conf.py"]
 skip = "docs/conf.py"
 check-filenames = true
 
-[build-system]
-requires = ["hatchling>=1.21.0", "hatch-vcs>=0.3.0"]
-build-backend = "hatchling.build"
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "wizard_template/_version.py"
+
+[tool.hatch.envs.default]
+installer = "uv"
+description = "Base development environment"
+dependencies = ["coverage[toml]", "pre-commit", "pytest-cov", "pytest"]
+
+[tool.hatch.envs.default.scripts]
+_wizard = ["python ./scripts/rename_project_content.py"]
+pre-commit-install = "pre-commit install {args}"
+pre-commit-uninstall = "pre-commit uninstall {args}"
+check = "pre-commit run {args} --all-files"
+type = "check mypy {args}"
+lint = "check ruff {args}"
+format = "check ruff-format {args}"
+test = "pytest --cov --cov-report=term {args}"
+test-no-cov = "test --no-cov {args}"
+qa = ["check", "test", "echo '✅ QA passed'"]
+
+[tool.hatch.envs.test]
+description = "Extended test environment"
+extra-dependencies = ["pytest-randomly", "pytest-rerunfailures", "pytest-xdist"]
+
+[tool.hatch.envs.test.scripts]
+extended = "test -n auto --reruns 7 --reruns-delay 1 {args}"
+
+[[tool.hatch.envs.test.matrix]]
+python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
+
+[tool.hatch.envs.docs]
+description = "Documentation environment"
+template = "docs"
+install = true
+dependencies = ["docutils", "jupyter-book", "sphinx-autobuild"]
+
+[tool.hatch.envs.docs.scripts]
+config = "jupyter-book config sphinx docs {args}"
+build = ["config", "jupyter-book build docs --path-output build {args}"]
+serve = [
+    "config",
+    "sphinx-autobuild docs build/_build/html --open-browser --watch wizard_template {args}",
+]
