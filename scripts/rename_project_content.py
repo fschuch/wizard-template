@@ -1,9 +1,12 @@
 """Helper script to rename the project content after cloning the template."""
+
+from __future__ import annotations
+
 import itertools
 import re
+import subprocess
 from pathlib import Path
-
-from git.repo import Repo
+from typing import NamedTuple
 
 # Constants for your username and repo name
 ORIGINAL_USERNAME = "fschuch"
@@ -16,30 +19,73 @@ TARGET_FILES = {"*.py", "*.md", "*.yaml", "*.toml", "LICENSE"}
 CWD = Path.cwd()
 THIS_FILE = Path(__file__)
 
+COMMUNITY_BADGE_TEMPLATE = (
+    "[![Wizard Template]"
+    "(https://img.shields.io/badge/Wizard-Template-%23447CAA)]"
+    "(https://github.com/{}/{})"
+)
 
-def main():
+ORIGINAL_BADGE = COMMUNITY_BADGE_TEMPLATE.format(
+    ORIGINAL_USERNAME, ORIGINAL_PROJECT_NAME
+)
+
+
+class GitInfo(NamedTuple):
+    """Named tuple to store the git info."""
+
+    username: str
+    repo: str
+
+    @classmethod
+    def from_repo_info(cls) -> GitInfo:
+        """
+        Instantiate the class from the repository information.
+
+        >>> GitInfo.from_repo_info() # doctest: +SKIP
+        GitInfo(username='fschuch', repo='wizard-template')
+        """
+        # Run the git command and get the output
+        git_command = ["git", "config", "--get", "remote.origin.url"]
+        git_url = subprocess.check_output(git_command).decode("utf-8").strip()
+
+        # Use regex to extract the user and repo name
+        match = re.search(r"(\w+\.\w+)[:/](?P<username>.+)/(?P<repo>.+)\.git", git_url)
+        if match:
+            return cls(**match.groupdict())
+        raise ValueError("Could not parse git URL")
+
+
+def from_repo_info_with_fallback() -> GitInfo:
+    """Get the repository information."""
+    try:
+        return GitInfo.from_repo_info()
+    except (ValueError, subprocess.CalledProcessError):
+        print("Could not parse git URL, please enter the information manually.")
+        username = input("Enter your username: ")
+        repo = input("Enter your repo: ")
+        return GitInfo(username, repo)
+
+
+def main() -> None:
     """Rename the project content."""
     print("The wizard will now prepare your project...")
-    # Get info about the project if is running from
-    repo = Repo(CWD)
-    remote_url = repo.remotes.origin.url
 
-    # Extract username and project name
-    username, project_name = remote_url.removesuffix(".git").split("/")[-2:]
+    # Get username and project name
+    username, project_name = from_repo_info_with_fallback()
 
     # Prepare the project name variations
     project_name_dash = project_name.replace("_", "-")
     project_name_underscore = project_name.replace("-", "_")
+
+    tmp_badge = COMMUNITY_BADGE_TEMPLATE.format(username, project_name)
 
     # Map new values to the patterns to be replaced
     patterns = {
         username: re.compile(ORIGINAL_USERNAME),
         project_name: re.compile(ORIGINAL_PROJECT_NAME),
         project_name_dash: re.compile(ORIGINAL_PROJECT_NAME.replace("_", "-")),
-        project_name_underscore: re.compile(
-            ORIGINAL_PROJECT_NAME.replace("-", "_")
-        ),
-        "": re.compile(r"(post_)?wizard\s?=\s?\".+\""),
+        project_name_underscore: re.compile(ORIGINAL_PROJECT_NAME.replace("-", "_")),
+        "": re.compile(r"_wizard\s?=\s?[\".+\"]\n"),
     }
 
     # Replace hardcoded strings
@@ -54,6 +100,9 @@ def main():
         for new_value, pattern in patterns.items():
             filedata = pattern.sub(new_value, filedata)
 
+        # Revert back the badge to support the original project
+        filedata = filedata.replace(tmp_badge, ORIGINAL_BADGE)
+
         # Write the file out again
         filepath.write_text(filedata)
 
@@ -64,10 +113,6 @@ def main():
     # Rename the directory
     print(f"Renaming folder wizard_template to {project_name_underscore}")
     Path("wizard_template").rename(project_name_underscore)
-
-    # Stage the changes
-    print("Staging changes...")
-    repo.git.add(A=True)
 
     print("Done!")
 

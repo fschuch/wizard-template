@@ -1,0 +1,108 @@
+name: CI
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+    branches:
+      - "main"
+      - "release/**"
+  pull_request:
+    paths:
+      - .github/workflows/ci.yaml
+      - pyproject.toml
+      - tests/**
+      - wizard_template/**
+  schedule:
+    - cron: "0 0 * * 1" # midnight every Monday
+
+concurrency:
+  group: "${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  qa:
+    # Static code analysis and linting powered by pre-commit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+      - uses: pre-commit/action@v3.0.1
+
+  test:
+    needs: qa
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: "pip"
+
+      - name: Install Hatch
+        run: python -m pip install hatch
+
+      - name: Run tests
+        run: |
+          hatch run +py=${{ matrix.python-version }} test:extended --cov-report=xml:coverage.${{ matrix.os }}.${{ matrix.python-version }}.xml
+
+      - name: Upload coverage data
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-${{ matrix.os }}-${{ matrix.python-version }}
+          path: coverage.*.xml
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+      - name: Install Hatch
+        run: python -m pip install hatch
+      - name: Build package
+        run: hatch build
+      - uses: actions/upload-artifact@v4
+        with:
+          path: dist/*.tar.gz
+          name: built-sdist
+      - uses: actions/upload-artifact@v4
+        with:
+          path: dist/*.whl
+          name: built-bdist
+
+  release:
+    needs: build
+    # upload to PyPI on every tag and ensure it does not run on forks
+    if: github.event_name == 'push' && github.ref_type == 'tag' && github.repository == 'fschuch/wizard_template'
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/wizard_template
+    permissions:
+      id-token: write # IMPORTANT: this permission is mandatory for trusted publishing
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: built-sdist
+          path: dist
+      - uses: actions/download-artifact@v4
+        with:
+          name: built-bdist
+          path: dist
+
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1

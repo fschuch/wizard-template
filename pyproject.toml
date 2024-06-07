@@ -1,85 +1,66 @@
-[tool.poetry]
+
+[build-system]
+requires = ["hatchling>=1.21.0", "hatch-vcs>=0.3.0"]
+build-backend = "hatchling.build"
+
+[project]
 name = "wizard-template"
-version = "0.0.0" # no need to change, it is updated by poetry-version-plugin at build time
-description = "A template for a python project containing a library, tests, docs, and CI/CD."
-license = "MIT"
+description = "A template for a python project containing a package, tests, docs, and CI/CD."
 readme = "README.md"
-repository = "https://github.com/fschuch/wizard-template"
-authors = ["Felipe N. Schuch <me@fschuch.com>"]
-packages = [{ include = "wizard_template" }]
+license = "MIT"
+requires-python = ">=3.8"
+authors = [{ name = "fschuch", email = "me@fschuch.com" }]
 classifiers = [
+    "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
-    "Programming Language :: Python",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
-    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python",
 ]
+dynamic = ["version"]
+dependencies = []
 
-[tool.poetry.urls]
-"Bug Tracker" = "https://github.com/fschuch/wizard-template/issues"
-"Changelog" = "https://github.com/fschuch/wizard-template/releases"
-"Documentation" = "https://fschuch.github.io/wizard-template/"
+[project.urls]
+Source = "https://github.com/fschuch/wizard-template"
+Tracker = "https://github.com/fschuch/wizard-template/issues"
+Changelog = "https://github.com/fschuch/wizard-template/blob/main/CHANGELOG.md"
+Documentation = "https://fschuch.github.io/wizard-template/"
 
-[tool.poetry.dependencies]
-python = "^3.8.10"
-
-[tool.poetry.group.dev.dependencies]
-codespell = "^2.2.5"
-gitpython = "^3.1.32"
-mypy = "^1.5.1"
-pre-commit = "^3.3.3"
-pytest = "^7.4.0"
-pytest-cov = "^4.1.0"
-pytest-random-order = "^1.1.0"
-ruff = "^0.2.1"
-taskipy = "^1.12.0"
-
-[tool.poetry.group.docs]
-optional = true
-
-[tool.poetry.group.docs.dependencies]
-docutils = "0.17.1"
-jupyter-book = "^0.15.1"
-sphinx-autobuild = "^2021.3.14"
+[project.scripts]
 
 [tool.pytest.ini_options]
-minversion = "7.0"
 addopts = [
-    "-s",
-    "--random-order",
-    "--cov=wizard_template",
     "--doctest-modules",
-    "--doctest-glob='*.md'",
     "--doctest-continue-on-failure",
     "--doctest-report=ndiff",
 ]
 
+minversion = "8.0"
 [tool.coverage.run]
-parallel = true
-source = ["docs", "tests", "wizard_template"]
+branch = true
+relative_files = true
+source = ["wizard_template", "tests"]
+omit = ["wizard_template/_version.py"]
 
 [tool.coverage.report]
 fail_under = 90
+precision = 2
 show_missing = true
-
-[tool.coverage.html]
-show_contexts = true
+exclude_lines = ["no cov", "if __name__ == .__main__.:", "if TYPE_CHECKING:"]
 
 [tool.ruff]
-line-length = 79
-select = ["A", "B", "C", "D", "E", "F", "FBT", "I", "N", "S", "SIM", "UP", "W"]
 extend-exclude = ["./docs/conf.py"]
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.extend-per-file-ignores]
 "__init__.py" = ["F401"] # imported but unused
-"tests/*" = ["S101"]     # use of assert detected
 "*.ipynb" = ["E402"]     # module level import not at top of file
 
-[tool.ruff.pydocstyle]
+[tool.ruff.lint.pydocstyle]
 convention = "numpy"
 
 [tool.mypy]
@@ -88,29 +69,64 @@ ignore_missing_imports = true
 exclude = ["docs/conf.py"]
 
 [tool.codespell]
-skip = "./docs/conf.py,poetry.lock"
+skip = "docs/conf.py"
 check-filenames = true
 
-[tool.taskipy.settings]
-runner = "poetry run"
+[tool.hatch.version]
+source = "vcs"
 
-[tool.taskipy.tasks]
-pre_commit_install = "pre-commit install"
-test = "pytest"
-pre_lint = "task pre_commit_install"
-lint = "pre-commit run --all-files"
-qa = "task lint && task test && echo '✅ QA passed'"
-docs_update_config = "jupyter-book config sphinx docs"
-pre_docs = "poetry install --with docs"
-docs = "jupyter-book build docs --path-output build"
-pre_docs_serve = "task pre_docs"
-docs_serve = "sphinx-autobuild docs build/_build/html --open-browser --watch wizard_template"
-wizard = "python ./scripts/rename_project_content.py"
-post_wizard = "poetry remove gitpython"
+[tool.hatch.build.hooks.vcs]
+version-file = "wizard_template/_version.py"
 
-[tool.poetry-version-plugin]
-source = "git-tag"
+[tool.hatch.envs.default]
+description = "Base development environment"
+installer = "uv"
+dependencies = [
+    "coverage[toml]>=7.5.3",
+    "pre-commit>=3.5.0",
+    "pytest-cov>=5.0.0",
+    "pytest>=8.2.2",
+]
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.hatch.envs.default.scripts]
+_wizard = ["python ./scripts/rename_project_content.py"]
+pre-commit-install = "pre-commit install {args}"
+pre-commit-uninstall = "pre-commit uninstall {args}"
+check = "pre-commit run {args} --all-files"
+type = "check mypy {args}"
+lint = "check ruff {args}"
+format = "check ruff-format {args}"
+test = "pytest --cov --cov-report=term {args}"
+test-no-cov = "test --no-cov {args}"
+qa = ["check", "test", "echo '✅ QA passed'"]
+
+[tool.hatch.envs.test]
+description = "Extended test environment"
+extra-dependencies = ["pytest-randomly", "pytest-rerunfailures", "pytest-xdist"]
+
+[tool.hatch.envs.test.scripts]
+extended = "test -n auto --reruns 7 --reruns-delay 1 {args}"
+
+[[tool.hatch.envs.test.matrix]]
+python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
+
+[tool.hatch.envs.docs]
+description = "Documentation environment"
+template = "docs"
+install = true
+installer = "uv"
+python = "3.12"
+dependencies = [
+    "docutils==0.20.1",
+    "jupyter-book==1.0.0",
+    "sphinx-autobuild==2024.4.16",
+    "sphinx==7.3.7",
+]
+
+[tool.hatch.envs.docs.scripts]
+config = "jupyter-book config sphinx docs {args}"
+build = ["config", "jupyter-book build docs --path-output build {args}"]
+serve = [
+    "config",
+    "sphinx-autobuild docs build/_build/html --open-browser --watch wizard_template {args}",
+]

@@ -1,27 +1,31 @@
 changelog:
   categories:
-    - title: Breaking Changes
+    - title: Security
       labels:
-        - major
-        - breaking-change
-    - title: Features
+        - security
+    - title: Removed
       labels:
-        - minor
-        - feature
-    - title: Fixes
+        - removed
+    - title: Deprecated
       labels:
-        - patch
-        - bug
-    - title: Docs
+        - deprecated
+    - title: Added
       labels:
-        - documentation
-    - title: Upgrades
+        - added
+    - title: Changed
       labels:
-        - dependencies
+        - changed
+    - title: Fixed
+      labels:
+        - fixed
+    - title: Documentation
+      labels:
+        - docs
     - title: Internals
       labels:
         - chore
         - refactor
+        - dependencies
     - title: Other Changes
       labels:
         - "*"

@@ -20,3 +20,5 @@ jobs:
         with:
           use-quiet-mode: "yes"
           use-verbose-mode: "yes"
+          folder-path: "docs/"
+          file-path: "README.md"
