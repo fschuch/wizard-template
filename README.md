@@ -33,7 +33,7 @@ In addition, [Git hooks](https://pre-commit.com/) can be used to guarantee consi
 
 The documentation is initialized with [Jupyter Books](https://jupyterbook.org/en/stable/intro.html), providing a promising approach for interactive tutorials.
 
-You can check at anytime the environments and scripts that are prepared to support your development workflow:
+You can check at any time the environments and scripts that are prepared to support your development workflow:
 
 ```plain
 $ hatch env show --ascii
@@ -74,13 +74,13 @@ $ hatch env show --ascii
 
 ## Quick Start
 
-### Use the template as a start point for you own project
+### Use the template as a start point for your own project
 
 1. Click on [Use this template](https://github.com/new?template_name=wizard-template&template_owner=fschuch), creating a new project for you from it.
 
 1. If you don't have Hatch, [download and install it](https://hatch.pypa.io/latest/install/) following the instructions for your OS.
 
-   - I personally like to keep the Python environments within the project I'm working on, Hatch can be set to do so:
+   - I like to keep the Python environments within the project I'm working on, Hatch can be set to do so:
 
      ```bash
      hatch config set dirs.env.virtual .venv
@@ -172,7 +172,7 @@ $ hatch env show --ascii
 
 1. As mentioned above, the [pre-commit](https://pre-commit.com) tool is used to enforce code quality standards.
    Even though it performs checks on the changes for every commit when installed (`hatch run pre-commit-install`),
-   it is a good practice to run the checks on the whole codebase from time to time (when a new hook is added or on Pull
+   it is a good practice to run the checks on the whole codebase occasionally (when a new hook is added or on Pull
    Requests). You can do so by running `hatch run check <hook-id>`, for instance `hatch run check nbstripout`.
    Some of them are available as scripts as a syntax sugar, like `hatch run lint`,
    `hatch run format`, or `hatch run type`. They check the whole codebase using ruff, ruff-format, and mypy, respectively.
@@ -212,7 +212,7 @@ Some may argue about the importance of [Keeping a Changelog](https://keepachange
 ### Managing the Version Number
 
 The version in the project is set dynamically by [hatch-vcs](https://github.com/ofek/hatch-vcs).
-At installation and build time, the version is recovered from the version control system an exported to the file `wizard_template/_version.py`.
+At installation and build time, the version is recovered from the version control system and exported to the file `wizard_template/_version.py`.
 In this way, there is no need to keep the version hard-coded on the codebase. You can use the command `hatch version` to check the current version.
 On the deployment workflow, the version is recovered from the tag and used to build the package.
 
@@ -249,7 +249,7 @@ The template includes a `.vscode` folder with a `extensions.json` file that sugg
 #### Communicate Type Annotations
 
 [PEP 561](https://www.python.org/dev/peps/pep-0561/) is a guideline that explains how a Python package can show that it has inline type annotations.
-These annotations are useful for static type checkers, which are tools that help ensure your code is error-free. [Mypy](https://mypy.readthedocs.io/en/stable/installed_packages.html) checks for a file named `py.typed` in the root of the installed package.
+These annotations are useful for static type checkers, which are tools that help ensure your code has been error-free. [Mypy](https://mypy.readthedocs.io/en/stable/installed_packages.html) checks for a file named `py.typed` in the root of the installed package.
 
 ## Next steps
 
