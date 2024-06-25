@@ -244,7 +244,7 @@ The process can also be triggered when a Release creates a new tag on your repo,
 
 #### VSCode Configuration
 
-The template includes a `.vscode` folder with a `extensions.json` file that suggests the extensions to be installed on VSCode, in line with the quality assurance tools included in the template. It allows test, debug, auto-format, lint, and a few other functionalities to work directly on your IDE. It also includes a `settings.json` file that configures the Python extension to use the virtual environment created by Hatch. Remember to set hatch to use the virtual environment within the project folder `hatch config set dirs.env.virtual .hatch`.
+The template includes a `.vscode` folder with a `extensions.json` file that suggests the extensions to be installed on VSCode, in line with the quality assurance tools included in the template. It allows test, debug, auto-format, lint, and a few other functionalities to work directly on your IDE. It also includes a `settings.json` file that configures the Python extension to use the virtual environment created by Hatch. Remember to set hatch to use the virtual environment within the project folder `hatch config set dirs.env.virtual .venv`.
 
 #### Communicate Type Annotations
 
