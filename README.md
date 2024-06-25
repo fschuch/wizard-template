@@ -1,7 +1,7 @@
 # The Wizard Template for Python Projects
 
 <p align="center">
-<a href="https://github.com/fschuch/wizard-template"><img src="docs/logo.png" alt=Wizard template logo" width="320"></a>
+<a href="https://github.com/fschuch/wizard-template"><img src="docs/logo.png" alt="Wizard template logo" width="320"></a>
 </p>
 <p align="center">
     <em>Let the wizard do the heavy lifting so you can focus on your craft</em>
