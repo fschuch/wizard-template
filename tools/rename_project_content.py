@@ -112,7 +112,7 @@ def main() -> None:
 
     # Rename the directory
     print(f"Renaming folder wizard_template to {project_name_underscore}")
-    Path("wizard_template").rename(project_name_underscore)
+    Path("src/wizard_template").rename(f"src/{project_name_underscore}")
 
     print("Done!")
 
