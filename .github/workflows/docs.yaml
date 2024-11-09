@@ -41,7 +41,7 @@ jobs:
 
   deploy:
     needs: build
-    if: github.event_name == 'push' && github.ref_type == 'tag' && github.repository == 'fschuch/wizard_template'
+    if: github.event_name == 'push' && github.ref_type == 'tag' && github.repository == 'fschuch/wizard-template'
     runs-on: ubuntu-latest
     permissions:
       contents: write
