@@ -12,7 +12,7 @@ on:
       - .github/workflows/ci.yaml
       - pyproject.toml
       - tests/**
-      - wizard_template/**
+      - src/wizard_template/**
   schedule:
     - cron: "0 0 * * 1" # midnight every Monday
 
@@ -87,7 +87,7 @@ jobs:
   release:
     needs: build
     # upload to PyPI on every tag and ensure it does not run on forks
-    if: github.event_name == 'push' && github.ref_type == 'tag' && github.repository == 'fschuch/wizard_template'
+    if: github.event_name == 'push' && github.ref_type == 'tag' && github.repository == 'fschuch/wizard-template'
     runs-on: ubuntu-latest
     environment:
       name: pypi

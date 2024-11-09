@@ -111,32 +111,31 @@ $ hatch env show --ascii
    codespell................................................................Passed
    mdformat.................................................................Passed
    nbstripout...............................................................Passed
-   cmd [2] | pytest --cov
-   ================================ test session starts ================================
-   platform darwin -- Python 3.12.2, pytest-8.0.2, pluggy-1.4.0
+   cmd [2] | pytest --cov --cov-report=term
+   ============================================================ test session starts =============================================================
+   platform darwin -- Python 3.12.7, pytest-8.3.3, pluggy-1.5.0
    rootdir: /Users/fschuch/Documents/GitHub/wizard-template
    configfile: pyproject.toml
-   plugins: cov-4.1.0
-   collected 7 items
+   plugins: cov-6.0.0
+   collected 8 items
 
-   tests/test_core.py ......                                                     [ 85%]
-   wizard_template/core.py .                                                     [100%]
+   src/wizard_template/core.py .                                                                                                          [ 12%]
+   tests/test_core.py ......                                                                                                              [ 87%]
+   tools/rename_project_content.py s                                                                                                      [100%]
 
-   ---------- coverage: platform darwin, python 3.12.2-final-0 -------------
-   Name                          Stmts   Miss Branch BrPart  Cover   Missing
-   -------------------------------------------------------------------------
-
-   tests/__init__.py                 0      0      0      0   100%
-   tests/test_core.py               10      0      6      0   100%
-   wizard_template/__init__.py       2      0      0      0   100%
-   wizard_template/core.py           8      0      2      0   100%
-   -------------------------------------------------------------------------
-
-   TOTAL                            20      0      8      0   100%
+   ---------- coverage: platform darwin, python 3.12.7-final-0 ----------
+   Name                              Stmts   Miss Branch BrPart    Cover   Missing
+   -------------------------------------------------------------------------------
+   src/wizard_template/__init__.py       2      0      0      0  100.00%
+   src/wizard_template/core.py           8      0      2      0  100.00%
+   tests/__init__.py                     0      0      0      0  100.00%
+   tests/test_core.py                   10      0      0      0  100.00%
+   -------------------------------------------------------------------------------
+   TOTAL                                20      0      2      0  100.00%
 
    Required test coverage of 90.0% reached. Total coverage: 100.00%
 
-   ================================= 7 passed in 0.11s =================================
+   ======================================================== 7 passed, 1 skipped in 0.05s ========================================================
    cmd [3] | echo '✅ QA passed'
    ✅ QA passed
    ```
@@ -212,7 +211,7 @@ Some may argue about the importance of [Keeping a Changelog](https://keepachange
 ### Managing the Version Number
 
 The version in the project is set dynamically by [hatch-vcs](https://github.com/ofek/hatch-vcs).
-At installation and build time, the version is recovered from the version control system and exported to the file `wizard_template/_version.py`.
+At installation and build time, the version is recovered from the version control system and exported to the file `src/wizard_template/_version.py`.
 In this way, there is no need to keep the version hard-coded on the codebase. You can use the command `hatch version` to check the current version.
 On the deployment workflow, the version is recovered from the tag and used to build the package.
 
