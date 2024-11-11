@@ -37,39 +37,40 @@ You can check at any time the environments and scripts that are prepared to supp
 
 ```plain
 $ hatch env show --ascii
-                                          Standalone
-+---------+---------+------------------+----------------------+------------------------------+
-| Name    | Type    | Dependencies     | Scripts              | Description                  |
-+=========+=========+==================+======================+==============================+
-| default | virtual | coverage[toml]   | check                | Base development environment |
-|         |         | pre-commit       | format               |                              |
-|         |         | pytest           | lint                 |                              |
-|         |         | pytest-cov       | pre-commit-install   |                              |
-|         |         |                  | pre-commit-uninstall |                              |
-|         |         |                  | qa                   |                              |
-|         |         |                  | test                 |                              |
-|         |         |                  | test-no-cov          |                              |
-|         |         |                  | type                 |                              |
-+---------+---------+------------------+----------------------+------------------------------+
-| docs    | virtual | docutils         | build                | Documentation environment    |
-|         |         | jupyter-book     | config               |                              |
-|         |         | sphinx-autobuild | serve                |                              |
-+---------+---------+------------------+----------------------+------------------------------+
+                                               Standalone
++---------+---------+-----------------------------+----------------------+------------------------------+
+| Name    | Type    | Dependencies                | Scripts              | Description                  |
++=========+=========+=============================+======================+==============================+
+| default | virtual | coverage[toml]>=7.5.3       | check                | Base development environment |
+|         |         | pre-commit>=3.5.0           | format               |                              |
+|         |         | pytest-cov>=5.0.0           | lint                 |                              |
+|         |         | pytest>=8.2.2               | pre-commit-install   |                              |
+|         |         |                             | pre-commit-uninstall |                              |
+|         |         |                             | qa                   |                              |
+|         |         |                             | test                 |                              |
+|         |         |                             | test-no-cov          |                              |
+|         |         |                             | type                 |                              |
++---------+---------+-----------------------------+----------------------+------------------------------+
+| docs    | virtual | docutils==0.20.1            | build                | Documentation environment    |
+|         |         | jupyter-book==1.0.0         | config               |                              |
+|         |         | sphinx-autobuild==2024.4.16 | serve                |                              |
+|         |         | sphinx==7.3.7               |                      |                              |
++---------+---------+-----------------------------+----------------------+------------------------------+
                                                  Matrices
-+------+---------+-------------+----------------------+----------------------+---------------------------+
-| Name | Type    | Envs        | Dependencies         | Scripts              | Description               |
-+======+=========+=============+======================+======================+===========================+
-| test | virtual | test.py3.8  | coverage[toml]       | check                | Extended test environment |
-|      |         | test.py3.9  | pre-commit           | extended             |                           |
-|      |         | test.py3.10 | pytest               | format               |                           |
-|      |         | test.py3.11 | pytest-cov           | lint                 |                           |
-|      |         | test.py3.12 | pytest-randomly      | pre-commit-install   |                           |
-|      |         |             | pytest-rerunfailures | pre-commit-uninstall |                           |
-|      |         |             | pytest-xdist         | qa                   |                           |
-|      |         |             |                      | test                 |                           |
-|      |         |             |                      | test-no-cov          |                           |
-|      |         |             |                      | type                 |                           |
-+------+---------+-------------+----------------------+----------------------+---------------------------+
++------+---------+-------------+-----------------------+----------------------+---------------------------+
+| Name | Type    | Envs        | Dependencies          | Scripts              | Description               |
++======+=========+=============+=======================+======================+===========================+
+| test | virtual | test.py3.9  | coverage[toml]>=7.5.3 | check                | Extended test environment |
+|      |         | test.py3.10 | pre-commit>=3.5.0     | extended             |                           |
+|      |         | test.py3.11 | pytest-cov>=5.0.0     | format               |                           |
+|      |         | test.py3.12 | pytest-randomly       | lint                 |                           |
+|      |         | test.py3.13 | pytest-rerunfailures  | pre-commit-install   |                           |
+|      |         |             | pytest-xdist          | pre-commit-uninstall |                           |
+|      |         |             | pytest>=8.2.2         | qa                   |                           |
+|      |         |             |                       | test                 |                           |
+|      |         |             |                       | test-no-cov          |                           |
+|      |         |             |                       | type                 |                           |
++------+---------+-------------+-----------------------+----------------------+---------------------------+
 ```
 
 ## Quick Start
@@ -152,7 +153,7 @@ $ hatch env show --ascii
 
 ### Dependencies
 
-1. The template is designed to work with Python 3.8 and later versions. It is recommended to use the latest stable version of Python.
+1. The template is designed to work with Python 3.9 and later versions. It is recommended to use the latest stable version of Python.
 
 1. Project dependencies are managed on the file [pyproject.toml](pyproject.toml), refer to
    [Dependency configuration](https://hatch.pypa.io/latest/config/dependency/) for more details on the topic.
