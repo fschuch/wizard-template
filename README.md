@@ -28,6 +28,7 @@ To ensure code quality, several tools are suggested and pre-configured:
 - [ruff](https://github.com/astral-sh/ruff) as the linter and code formatter
 - [codespell](https://github.com/codespell-project/codespell) to check spelling
 - [pytest](https://docs.pytest.org/en/7.4.x/) as the test engine
+- [zizmor](https://github.com/woodruffw/zizmor) for static analysis tool for GitHub Actions workflows
 
 In addition, [Git hooks](https://pre-commit.com/) can be used to guarantee consistency and leverage the aforementioned tools. The workflow [ci.yaml](.github/workflows/ci.yaml) runs them automatically for you.
 
@@ -112,6 +113,7 @@ $ hatch env show --ascii
    codespell................................................................Passed
    mdformat.................................................................Passed
    nbstripout...............................................................Passed
+   zizmor...................................................................Passed
    cmd [2] | pytest --cov --cov-report=term
    ============================================================ test session starts =============================================================
    platform darwin -- Python 3.12.7, pytest-8.3.3, pluggy-1.5.0
