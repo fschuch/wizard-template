@@ -11,11 +11,15 @@ on:
     paths:
       - "**/*.md"
 
+permissions: {}
+
 jobs:
   check-links:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: gaurav-nelson/github-action-markdown-link-check@v1
         with:
           use-quiet-mode: "yes"
