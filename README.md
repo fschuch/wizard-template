@@ -236,7 +236,7 @@ The documentation is also built automatically on the deployment workflow [docs.y
 
 The package can be published to PyPI in a general-purpose workflow that can be used for any branch model and versioning strategy.
 
-The action [ci.yaml](.github/workflows/ci.yaml) is triggered to publish the package to PyPi when any valid tag is pushed to the repository. The tag matching pattern is set to `v*.*.*`, for instance, `1.2.3`, `0.0.1rc2`, `2023.2.0`, etc. Notice all previous steps on CI are executed before the deployment, including static analysis and tests.
+The action [ci.yaml](.github/workflows/ci.yaml) is triggered to publish the package to PyPi when any valid tag is pushed to the repository. The tag matching pattern is set to `v*.*.*`, for instance, `v1.2.3`, `v0.0.1rc2`, `v2023.2.0`, etc. Notice all previous steps on CI are executed before the deployment, including static analysis and tests.
 
 - Refer to [Adding a trusted publisher to an existing PyPI project](https://docs.pypi.org/trusted-publishers/adding-a-publisher/) to integrate the package with the PyPI project.
 
