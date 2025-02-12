@@ -79,14 +79,14 @@ def main() -> None:
 
     tmp_badge = COMMUNITY_BADGE_TEMPLATE.format(username, project_name)
 
-    # Map new values to the patterns to be replaced
-    patterns = {
-        username: re.compile(ORIGINAL_USERNAME),
-        project_name: re.compile(ORIGINAL_PROJECT_NAME),
-        project_name_dash: re.compile(ORIGINAL_PROJECT_NAME.replace("_", "-")),
-        project_name_underscore: re.compile(ORIGINAL_PROJECT_NAME.replace("-", "_")),
-        "": re.compile(r"_wizard\s?=\s?[\".+\"]\n"),
-    }
+    # Pair new values and the patterns to be replaced
+    patterns = [
+        (username, re.compile(ORIGINAL_USERNAME)),
+        (project_name, re.compile(ORIGINAL_PROJECT_NAME)),
+        (project_name_dash, re.compile(ORIGINAL_PROJECT_NAME.replace("_", "-"))),
+        (project_name_underscore, re.compile(ORIGINAL_PROJECT_NAME.replace("-", "_"))),
+        ("", re.compile(r"_wizard\s?=\s?\[\".+\"\]\n")),
+    ]
 
     # Replace hardcoded strings
     for filepath in itertools.chain(*map(CWD.rglob, TARGET_FILES)):
@@ -97,7 +97,7 @@ def main() -> None:
         filedata = filepath.read_text()
 
         # Replace the target string
-        for new_value, pattern in patterns.items():
+        for new_value, pattern in patterns:
             filedata = pattern.sub(new_value, filedata)
 
         # Revert back the badge to support the original project
