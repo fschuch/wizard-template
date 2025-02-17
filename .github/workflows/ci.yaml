@@ -55,7 +55,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install Hatch
-        uses: pypa/hatch@a3c83ab3d481fbc2dc91dd0088628817488dd1d5
+        uses: pypa/hatch@257e27e51a6a5616ed08a39a408a21c35c9931bc
 
       - name: Run tests
         run: |
@@ -78,7 +78,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install Hatch
-        uses: pypa/hatch@a3c83ab3d481fbc2dc91dd0088628817488dd1d5
+        uses: pypa/hatch@257e27e51a6a5616ed08a39a408a21c35c9931bc
       - name: Build package
         run: hatch build
       - uses: actions/upload-artifact@v4
