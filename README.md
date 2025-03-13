@@ -182,7 +182,7 @@ $ hatch env show --ascii
    - The file [project.toml](pyproject.toml) includes configuration for some of the tools, so they can be consumed from your IDE as well.
    - The file [.pre-commit-config.yaml](.pre-commit-config.yaml) includes the configuration for the pre-commit hooks.
 
-1. The [pytest](https://docs.pytest.org/en/7.4.x/) test suite can be run from the default environment with `hatch run test`
+1. The [pytest](https://docs.pytest.org/en/stable/index.html) test suite can be run from the default environment with `hatch run test`
    or `hatch run test-no-cov` (the latter without coverage check).
 
    Code examples on docstrings and documentation are tested by the `doctest` module (configured on the file [pyproject.toml](pyproject.toml)).
@@ -230,7 +230,7 @@ The documentation is also built automatically on the deployment workflow [docs.y
 
 - Modules and functions docstrings are used to generate the documentation thanks to the [sphinx-autodoc](https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html) and [sphinx-napoleon](https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html) packages.
 
-- Follow the instructions in [Configuring a publishing source for your GitHub Pages site](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site) to set up a publishing source for your GitHub Pages site. When using the automated workflow, the files will be located at the root (`/`) on the `gh-pages` branch. You will need the secret `TOKEN` with your [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) to make it work.
+- Follow the instructions in [Configuring a publishing source for your GitHub Pages site](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site) to set up a publishing source for your GitHub Pages site. When using the automated workflow, the files will be located at the root (`/`) on the `gh-pages` branch.
 
 ### Publishing
 
