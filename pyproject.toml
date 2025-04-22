@@ -38,10 +38,10 @@ tests-extra = [
     "pytest-xdist==3.6.1",
 ]
 docs = [
-    "docutils==0.20.1",
-    "jupyter-book==1.0.0",
-    "sphinx-autobuild==2024.4.16",
-    "sphinx==7.3.7",
+    "docutils==0.21.2",
+    "jupyter-book==1.0.4",
+    "sphinx-autobuild==2024.10.3",
+    "sphinx==7.4.7",
 ]
 
 [project.urls]
