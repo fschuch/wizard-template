@@ -25,6 +25,25 @@ classifiers = [
 dynamic = ["version"]
 dependencies = []
 
+[project.optional-dependencies]
+tests = [
+    "coverage[toml]>=7.5.3",
+    "pre-commit>=3.5.0",
+    "pytest-cov>=5.0.0",
+    "pytest>=8.2.2",
+]
+tests-extra = [
+    "pytest-randomly==3.16.0",
+    "pytest-rerunfailures==15.0",
+    "pytest-xdist==3.6.1",
+]
+docs = [
+    "docutils==0.20.1",
+    "jupyter-book==1.0.0",
+    "sphinx-autobuild==2024.4.16",
+    "sphinx==7.3.7",
+]
+
 [project.urls]
 Source = "https://github.com/fschuch/wizard-template"
 Tracker = "https://github.com/fschuch/wizard-template/issues"
@@ -80,13 +99,8 @@ version-file = "src/wizard_template/_version.py"
 
 [tool.hatch.envs.default]
 description = "Base development environment"
+features = ["tests"]
 installer = "uv"
-dependencies = [
-    "coverage[toml]>=7.5.3",
-    "pre-commit>=3.5.0",
-    "pytest-cov>=5.0.0",
-    "pytest>=8.2.2",
-]
 
 [tool.hatch.envs.default.scripts]
 _wizard = ["python ./tools/rename_project_content.py"]
@@ -102,7 +116,7 @@ qa = ["check", "test", "echo '✅ QA passed'"]
 
 [tool.hatch.envs.test]
 description = "Extended test environment"
-extra-dependencies = ["pytest-randomly", "pytest-rerunfailures", "pytest-xdist"]
+features = ["tests", "tests-extra"]
 
 [tool.hatch.envs.test.scripts]
 extended = "test -n auto --reruns 7 --reruns-delay 1 {args}"
@@ -112,16 +126,9 @@ python = ["3.9", "3.10", "3.11", "3.12", "3.13"]
 
 [tool.hatch.envs.docs]
 description = "Documentation environment"
-template = "docs"
-install = true
+features = ["docs"]
 installer = "uv"
 python = "3.12"
-dependencies = [
-    "docutils==0.20.1",
-    "jupyter-book==1.0.0",
-    "sphinx-autobuild==2024.4.16",
-    "sphinx==7.3.7",
-]
 
 [tool.hatch.envs.docs.scripts]
 config = "jupyter-book config sphinx docs {args}"
