@@ -34,7 +34,7 @@ tests = [
 ]
 tests-extra = [
     "pytest-randomly==3.16.0",
-    "pytest-rerunfailures==15.0",
+    "pytest-rerunfailures==15.1",
     "pytest-xdist==3.6.1",
 ]
 docs = [
