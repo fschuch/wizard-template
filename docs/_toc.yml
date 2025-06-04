@@ -11,4 +11,5 @@ parts:
       - file: markdown-notebooks
   - caption: References
     chapters:
-      - file: api-reference.rst
+      - file: references/api-reference.rst
+      - file: references/how-to-contribute.md
