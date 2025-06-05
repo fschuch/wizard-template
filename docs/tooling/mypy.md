@@ -6,6 +6,13 @@
 hatch run type
 ```
 
+## Alternatives
+
+Other static type checkers for Python include:
+
+- [Pyright](https://github.com/microsoft/pyright): Fast type checker, also powers VS Code's Python extension.
+- [Pyre](https://pyre-check.org/): Type checker from Meta, focused on speed and scalability.
+
 ## Configuration
 
 Mypy settings are defined in the `[tool.mypy]` section of [pyproject.toml](../pyproject.toml). You can customize strictness, ignored files, and more.

@@ -5,26 +5,27 @@ The Wizard Template for Python Projects provides a robust foundation for buildin
 ## How to Use the Template
 
 1. **Create your project**: Click on [Use this template](https://github.com/new?template_name=wizard-template&template_owner=fschuch) on GitHub to generate a new repository from this template.
-2. **Clone your repository**:
+
+1. **Clone your repository**:
 
    ```zsh
    git clone <your-repo-url>
    cd <your-repo-name>
    ```
 
-3. **Install Hatch**: Hatch manages environments and dependencies. Follow the [Hatch installation guide](https://hatch.pypa.io/latest/install/) for your OS. On macOS with Homebrew:
+1. **Install Hatch**: Hatch manages environments and dependencies. Follow the [Hatch installation guide](https://hatch.pypa.io/latest/install/) for your OS. On macOS with Homebrew:
 
    ```zsh
    brew install hatch
    ```
 
-4. **Configure local environments** (optional):
+1. **Configure local environments** (optional):
 
    ```zsh
    hatch config set dirs.env.virtual .venv
    ```
 
-5. **Install dependencies and run checks**:
+1. **Install dependencies and run checks**:
 
    ```zsh
    hatch run qa

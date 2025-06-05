@@ -7,6 +7,14 @@ hatch run test
 hatch run test-no-cov
 ```
 
+## Alternatives
+
+Other Python testing frameworks include:
+
+- [unittest](https://docs.python.org/3/library/unittest.html): Built-in Python testing framework.
+- [nose2](https://docs.nose2.io/): Successor to nose, compatible with unittest.
+- [doctest](https://docs.python.org/3/library/doctest.html): Test code examples in docstrings.
+
 ## Configuration
 
 Pytest settings are in the `[tool.pytest.ini_options]` section of [pyproject.toml](../pyproject.toml). Doctest integration and coverage are enabled by default.

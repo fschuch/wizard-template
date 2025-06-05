@@ -9,16 +9,16 @@ parts:
       - file: getting-started.md
   - caption: Tooling & Quality Assurance
     chapters:
-      - file: tooling.md
-      - file: hatch.md
-      - file: mypy.md
-      - file: ruff.md
-      - file: codespell.md
-      - file: pytest.md
-      - file: pre-commit.md
-      - file: zizmor.md
-      - file: coverage.md
-      - file: dependabot.md
+      - file: tooling/index.md
+      - file: tooling/hatch.md
+      - file: tooling/mypy.md
+      - file: tooling/ruff.md
+      - file: tooling/codespell.md
+      - file: tooling/pytest.md
+      - file: tooling/pre-commit.md
+      - file: tooling/zizmor.md
+      - file: tooling/coverage.md
+      - file: tooling/dependabot.md
   - caption: CI/CD & Automation
     chapters:
       - file: ci-cd.md

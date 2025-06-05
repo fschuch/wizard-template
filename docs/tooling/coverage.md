@@ -6,6 +6,13 @@ Test coverage tools measure how much of your code is exercised by tests. This te
 hatch run test
 ```
 
+## Alternatives
+
+Other tools for measuring Python test coverage include:
+
+- [pytest-cov](https://pytest-cov.readthedocs.io/): Pytest plugin for coverage reporting.
+- [coverage-badge](https://github.com/dbrgn/coverage-badge): Generates coverage badges for your project.
+
 Coverage settings are in the `[tool.coverage]` section of [pyproject.toml](../pyproject.toml). Adjust thresholds and reporting as needed.
 
 ## Further Reading
