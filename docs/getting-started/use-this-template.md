@@ -1,4 +1,4 @@
-# Getting Started
+# Use This Template
 
 The Wizard Template for Python Projects provides a robust foundation for building production-ready Python packages. This template comes pre-configured with essential tools for code quality, testing, documentation, and automation, allowing you to focus on your core logic.
 

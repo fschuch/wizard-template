@@ -1,4 +1,4 @@
-# Further Reading and Best Practices
+# Further Reading
 
 This section provides curated resources and best practices for Python development, Git/GitHub workflows, project maintenance, and general software engineering. Use these references to deepen your knowledge and keep your projects robust and maintainable.
 

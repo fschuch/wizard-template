@@ -6,19 +6,22 @@ root: intro
 parts:
   - caption: Getting Started
     chapters:
-      - file: getting-started.md
-  - caption: Tooling & Quality Assurance
+      - file: getting-started/about.md
+      - file: getting-started/dependencies.md
+      - file: getting-started/use-this-template.md
+  - caption: How to Use
     chapters:
       - file: tooling/index.md
-      - file: tooling/hatch.md
-      - file: tooling/mypy.md
-      - file: tooling/ruff.md
-      - file: tooling/codespell.md
-      - file: tooling/pytest.md
-      - file: tooling/pre-commit.md
-      - file: tooling/zizmor.md
-      - file: tooling/coverage.md
-      - file: tooling/dependabot.md
+        sections:
+          - file: tooling/hatch.md
+          - file: tooling/mypy.md
+          - file: tooling/ruff.md
+          - file: tooling/codespell.md
+          - file: tooling/pytest.md
+          - file: tooling/pre-commit.md
+          - file: tooling/zizmor.md
+          - file: tooling/coverage.md
+          - file: tooling/dependabot.md
   - caption: CI/CD & Automation
     chapters:
       - file: ci-cd.md
@@ -28,13 +31,8 @@ parts:
   - caption: Versioning & Changelog
     chapters:
       - file: versioning-changelog.md
-  - caption: Customization
-    chapters:
-      - file: customization.md
-  - caption: Further Reading
-    chapters:
-      - file: further-reading.md
   - caption: References
     chapters:
+      - file: references/further-reading.md
       - file: references/api-reference.rst
       - file: references/how-to-contribute.md
