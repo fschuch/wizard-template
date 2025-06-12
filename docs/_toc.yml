@@ -22,15 +22,9 @@ parts:
           - file: tooling/zizmor.md
           - file: tooling/coverage.md
           - file: tooling/dependabot.md
-  - caption: CI/CD & Automation
-    chapters:
-      - file: ci-cd.md
-  - caption: Documentation
-    chapters:
       - file: documentation.md
-  - caption: Versioning & Changelog
-    chapters:
       - file: versioning-changelog.md
+      - file: ci-cd.md
   - caption: References
     chapters:
       - file: references/further-reading.md

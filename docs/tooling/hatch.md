@@ -1,6 +1,6 @@
 # Hatch
 
-Hatch is a modern Python project manager that handles environments, dependencies, builds, and publishing. In this template, Hatch is configured via [pyproject.toml](../pyproject.toml) to manage development and documentation environments, as well as scripts for testing, linting, and more.
+Hatch is a modern Python project manager that handles environments, dependencies, builds, and publishing. In this template, Hatch is configured via `pyproject.toml` to manage development and documentation environments, as well as scripts for testing, linting, and more.
 
 ## Key Features
 
@@ -13,9 +13,15 @@ Hatch is a modern Python project manager that handles environments, dependencies
 
 Other popular Python project and environment managers include:
 
+- [uv](https://docs.astral.sh/uv/): An extremely fast Python package and project manager, written in Rust.
 - [Poetry](https://python-poetry.org/): Dependency management and packaging with a simple CLI.
-- [Pipenv](https://pipenv.pypa.io/): Combines pip and virtualenv for dependency management.
-- [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/): Enhances virtualenv with additional commands.
+- [Pixi](https://pixi.sh/latest/): Pixi is a fast, modern, and reproducible package management tool for developers of all backgrounds.
+
+For alternatives task runners, consider:
+
+- [Make](https://www.gnu.org/software/make/): A classic build automation tool.
+- [Mise](https://mise.jdx.dev) The front-end to your dev env.
+- [taskpy](https://github.com/taskipy/taskipy): The complementary task runner for python.
 
 ## Customization
 
