@@ -9,7 +9,7 @@ parts:
       - file: getting-started/about.md
       - file: getting-started/dependencies.md
       - file: getting-started/use-this-template.md
-  - caption: How to Use
+  - caption: User Guide
     chapters:
       - file: tooling/index.md
         sections:

@@ -43,6 +43,7 @@ sphinx:
     - sphinx.ext.autodoc
     - sphinx.ext.intersphinx
     - sphinx.ext.napoleon
+    - sphinxcontrib.programoutput
   config:
     #https://github.com/executablebooks/jupyter-book/issues/1950#issuecomment-1454801479
     suppress_warnings: ["mystnb.unknown_mime_type"]
@@ -55,3 +56,18 @@ sphinx:
     napoleon_include_special_with_doc: true
     napoleon_google_docstring: False
     napoleon_numpy_docstring: True
+
+    html_theme_options:
+      icon_links:
+        # - name: "Stars"
+        #   url: "https://github.com/fschuch/wizard-template/"
+        #   icon: "https://img.shields.io/github/stars/fschuch/wizard-template?style=social"
+        #   type: "url"
+        - name: "Releases"
+          url: "https://github.com/fschuch/wizard-template/releases"
+          icon: "https://img.shields.io/github/v/release/fschuch/wizard-template?style=social"
+          type: "url"
+        - name: "Use this Template"
+          url: "https://github.com/new?template_name=wizard-template&template_owner=fschuch"
+          icon: "https://img.shields.io/badge/Use_this_Template-%23447CAA?style=social&logo=github"
+          type: "url"
