@@ -1,44 +1,40 @@
 # How to use this Template
 
-The Wizard Template for Python Projects provides a robust foundation for building production-ready Python packages. This template comes pre-configured with essential tools for code quality, testing, documentation, and automation, allowing you to focus on your core logic.
+1. Create your project by clicking on [Use this template](https://github.com/new?template_name=wizard-template&template_owner=fschuch) to generate a new repository from this template. Choose a name for your project, and optionally, a description. Ensure to mark the repository as public or private according to your needs.
 
-## How to Use the Template
+   ````{note}
+   If you are using GitHub, you can also use the [GitHub CLI](https://cli.github.com/) to create a new repository from this template:
+   ```bash
+   gh repo create <your-repo-name> --template fschuch/wizard-template
+   ```
+   ````
 
-1. **Create your project**: Click on [Use this template](https://github.com/new?template_name=wizard-template&template_owner=fschuch) on GitHub to generate a new repository from this template.
+1. Ensure you have all [Dependencies](../dependencies.md) installed.
 
-1. **Clone your repository**:
+1. Clone your repository:
 
    ```zsh
    git clone <your-repo-url>
    cd <your-repo-name>
    ```
 
-1. **Install Hatch**: Hatch manages environments and dependencies. Follow the [Hatch installation guide](https://hatch.pypa.io/latest/install/) for your OS. On macOS with Homebrew:
+1. Set up Python virtual environments, install dependencies, and run all quality checks and tests to verify you have green lights on your project. All it takes is running:
 
-   ```zsh
-   brew install hatch
-   ```
-
-1. **Configure local environments** (optional):
-
-   ```zsh
+   ````{tip}
+   Optionally, configure Hatch to keep virtual environments within the project folder:
+   ```bash
    hatch config set dirs.env.virtual .venv
    ```
-
-1. **Install dependencies and run checks**:
+   ````
 
    ```zsh
    hatch run qa
    ```
 
-   This will set up virtual environments, install dependencies, and run all quality checks and tests.
+1. To rename your project, a helper script is included to update the project name and author in all files:
 
-## Renaming Your Project
+   ```zsh
+   hatch run _wizard
+   ```
 
-A helper script is included to update the project name and author in all files:
-
-```zsh
-hatch run _wizard
-```
-
-For more details, see the [README.md](../README.md) and the [Hatch documentation](https://hatch.pypa.io/).
+1. Review the previous changes, and ensure everything is correct before proceeding. You can now start developing your project!

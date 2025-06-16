@@ -1,29 +1,30 @@
 # pre-commit
 
-[pre-commit](https://pre-commit.com/) automates code quality checks by running hooks before each commit. This ensures that code style, linting, and other checks are enforced consistently. The template includes a `.pre-commit-config.yaml` file with hooks for ruff, mypy, codespell, and more.
-
-## Alternatives
-
-Other tools for managing Git hooks and code quality automation include:
-
-- [lefthook](https://evilmartians.com/chronicles/lefthook-fast-and-flexible-git-hooks-manager): Fast and flexible Git hooks manager.
-- [husky](https://typicode.github.io/husky/): Popular in JavaScript/TypeScript, but can be used for Python projects too.
-- Custom shell scripts in `.git/hooks/`.
+[pre-commit](https://pre-commit.com/) automates code quality checks by running hooks before each commit.
+It handles the installation of ruff, mypy, codespell, and others, on an isolated environments.
+It is a good pick since many of the fixes can be done automatically at commit time just on the changed files.
+These tools are not declared as development dependencies on the project to avoid duplication.
+The action [update-pre-commits.yaml](.github/workflows/update-pre-commits.yaml) scheduled to run weekly to ensure the hooks are up-to-date.
 
 ## Usage
 
-Install hooks with:
+Install hooks is you like to run them on every commit:
 
 ```zsh
 hatch run pre-commit-install
 ```
 
-Run all hooks manually:
+Run all hooks manually when needed:
 
 ```zsh
-hatch run qa
+hatch run check
 ```
+
+You can select them individually by `hatch run check <hook-id>`, for instance `hatch run check nbstripout`.
+Some of them are available as scripts as a syntax sugar, like `hatch run lint`,
+`hatch run format`, or `hatch run type`. They check the whole codebase using ruff, ruff-format, and mypy, respectively.
 
 ## Customization
 
-Edit `.pre-commit-config.yaml` to add, remove, or configure hooks. See the [pre-commit documentation](https://pre-commit.com/) for more details.
+The file [project.toml](https://github.com/fschuch/wizard-template/blob/main/pyproject.toml) includes configuration for some of the tools, so they can be consumed by your IDE as well.
+The file [.pre-commit-config.yaml](https://github.com/fschuch/wizard-template/blob/main/.pre-commit-config.yaml) includes the configuration for the pre-commit hooks.

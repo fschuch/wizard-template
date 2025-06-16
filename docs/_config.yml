@@ -54,8 +54,8 @@ sphinx:
         - null
 
     napoleon_include_special_with_doc: true
-    napoleon_google_docstring: False
-    napoleon_numpy_docstring: True
+    napoleon_google_docstring: true
+    napoleon_numpy_docstring: false
 
     html_theme_options:
       icon_links:

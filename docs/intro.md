@@ -1,6 +1,7 @@
 # Wizard Template's Documentation
 
-Let the wizard do the heavy lifting so you can focus on your craft
+```{centered} _Let the wizard do the heavy lifting so you can focus on your craft_
+```
 
 ::::{grid} 1 1 2 3
 :class-container: text-center
@@ -19,7 +20,7 @@ This is a general-purpose template that aims to provide a magical start to any P
 :::
 
 :::{grid-item-card}
-:link: tooling/index.md
+:link: tooling/index
 :link-type: doc
 :class-header: bg-light
 
@@ -66,7 +67,7 @@ Test, build, and publish your package to PyPi.
 :::
 
 :::{grid-item-card}
-:link: reference/further-reading
+:link: references/further-reading
 :link-type: doc
 :class-header: bg-light
 
@@ -78,8 +79,8 @@ Write MyST Markdown to create enriched documents with publication-quality featur
 
 ::::
 
-This documentation is organized into a few major sections.
+This documentation is organized into a few major sections:
 
-- **Tutorials** are step-by-step introductory guides to Jupyter Book.
-- **Topic Guides** cover specific areas in more depth, and are organized as discrete "how-to" sections.
-- **Reference** sections describe the API/syntax/etc of Jupyter Book in detail.
+- **Getting Started** provides an overview of the project and how to set it up.
+- **User Guide** contains details on how to use the template and the tools it provides.
+- **Reference** section includes further reading, besides [API references](references/api-reference.rst) and [How to Contribute](references/how-to-contribute.md) guides that are ready to be used by any project built with this template.

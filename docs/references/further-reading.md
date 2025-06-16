@@ -8,6 +8,8 @@ This section provides curated resources and best practices for Python developmen
 - [Python Packaging User Guide](https://packaging.python.org/)
 - [PEP 8 – Style Guide for Python Code](https://peps.python.org/pep-0008/)
 - [PEP 517/518 – Modern Python packaging standards](https://peps.python.org/pep-0517/)
+- [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html)
+- [Git Large File Storage (LFS)](https://git-lfs.github.com/)
 
 ## Git and GitHub Best Practices
 

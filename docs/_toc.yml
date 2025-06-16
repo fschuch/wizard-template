@@ -13,15 +13,12 @@ parts:
     chapters:
       - file: tooling/index.md
         sections:
-          - file: tooling/hatch.md
+          - file: tooling/pre-commit.md
           - file: tooling/mypy.md
           - file: tooling/ruff.md
           - file: tooling/codespell.md
           - file: tooling/pytest.md
-          - file: tooling/pre-commit.md
           - file: tooling/zizmor.md
-          - file: tooling/coverage.md
-          - file: tooling/dependabot.md
       - file: documentation.md
       - file: versioning-changelog.md
       - file: ci-cd.md
