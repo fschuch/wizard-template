@@ -9,7 +9,7 @@
    ```
    ````
 
-1. Ensure you have all [Dependencies](../dependencies.md) installed.
+1. Ensure you have all [Dependencies](dependencies.md) installed.
 
 1. Clone your repository:
 

@@ -9,7 +9,7 @@ hatch run format
 
 ## Configuration
 
-Ruff settings are in the `[tool.ruff]` section of [pyproject.toml](../pyproject.toml). Adjust rules, exclusions, and formatting options as needed.
+Ruff settings are in the `[tool.ruff]` section of `pyproject.toml`. Adjust rules, exclusions, and formatting options as needed.
 
 ## Further Reading
 

@@ -4,7 +4,7 @@
 It handles the installation of ruff, mypy, codespell, and others, on an isolated environments.
 It is a good pick since many of the fixes can be done automatically at commit time just on the changed files.
 These tools are not declared as development dependencies on the project to avoid duplication.
-The action [update-pre-commits.yaml](.github/workflows/update-pre-commits.yaml) scheduled to run weekly to ensure the hooks are up-to-date.
+The action `update-pre-commits.yaml` scheduled to run weekly to ensure the hooks are up-to-date.
 
 ## Usage
 
@@ -26,5 +26,5 @@ Some of them are available as scripts as a syntax sugar, like `hatch run lint`,
 
 ## Customization
 
-The file [project.toml](https://github.com/fschuch/wizard-template/blob/main/pyproject.toml) includes configuration for some of the tools, so they can be consumed by your IDE as well.
-The file [.pre-commit-config.yaml](https://github.com/fschuch/wizard-template/blob/main/.pre-commit-config.yaml) includes the configuration for the pre-commit hooks.
+The file `project.toml` includes configuration for some of the tools, so they can be consumed by your IDE as well.
+The file `.pre-commit-config.yaml` includes the configuration for the pre-commit hooks.

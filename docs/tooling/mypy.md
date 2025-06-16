@@ -8,7 +8,7 @@ hatch run type
 
 ## Configuration
 
-Mypy settings are defined in the `[tool.mypy]` section of [pyproject.toml](../pyproject.toml). You can customize strictness, ignored files, and more.
+Mypy settings are defined in the `[tool.mypy]` section of `pyproject.toml`. You can customize strictness, ignored files, and more.
 
 ## Further Reading
 
