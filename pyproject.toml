@@ -39,7 +39,7 @@ tests-extra = [
 ]
 docs = [
     "docutils==0.21.2",
-    "jupyter-book==1.0.4",
+    "jupyter-book==1.0.4.post1",
     "sphinx-autobuild==2024.10.3",
     "sphinx==7.4.7",
 ]
