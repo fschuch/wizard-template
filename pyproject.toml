@@ -42,6 +42,7 @@ docs = [
     "jupyter-book==1.0.4.post1",
     "sphinx-autobuild==2024.10.3",
     "sphinx==7.4.7",
+    "sphinxcontrib-programoutput==0.18",
 ]
 
 [project.urls]
@@ -80,7 +81,7 @@ extend-exclude = ["./docs/conf.py"]
 "*.ipynb" = ["E402"]     # module level import not at top of file
 
 [tool.ruff.lint.pydocstyle]
-convention = "numpy"
+convention = "google"
 
 [tool.mypy]
 pretty = true
@@ -126,6 +127,7 @@ python = ["3.9", "3.10", "3.11", "3.12", "3.13"]
 
 [tool.hatch.envs.docs]
 description = "Documentation environment"
+template = "docs"
 features = ["docs"]
 installer = "uv"
 python = "3.12"

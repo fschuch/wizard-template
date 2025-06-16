@@ -4,12 +4,26 @@
 format: jb-book
 root: intro
 parts:
-  - caption: Base
+  - caption: Getting Started
     chapters:
-      - file: markdown
-      - file: notebooks
-      - file: markdown-notebooks
+      - file: getting-started/about.md
+      - file: getting-started/dependencies.md
+      - file: getting-started/use-this-template.md
+  - caption: User Guide
+    chapters:
+      - file: tooling/index.md
+        sections:
+          - file: tooling/pre-commit.md
+          - file: tooling/mypy.md
+          - file: tooling/ruff.md
+          - file: tooling/codespell.md
+          - file: tooling/pytest.md
+          - file: tooling/zizmor.md
+      - file: documentation.md
+      - file: versioning-changelog.md
+      - file: ci-cd.md
   - caption: References
     chapters:
+      - file: references/further-reading.md
       - file: references/api-reference.rst
       - file: references/how-to-contribute.md

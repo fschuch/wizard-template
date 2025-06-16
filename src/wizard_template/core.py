@@ -13,27 +13,20 @@ class NotAnIntegerError(TypeError):
 def demo_function(incoming_int: int) -> int:
     """Demo function that doubles the input.
 
-    Args
-    ----
-    incoming_int
-        The input to be doubled
+    Args:
+        incoming_int: The input to be doubled
 
-    Returns
-    -------
-    int
-        The doubled input
+    Returns:
+       The doubled input
 
-    Raises
-    ------
-    NotAnIntegerError
-        If tried with an invalid input
+    Raises:
+        NotAnIntegerError: If tried with an invalid input
 
-    Examples
-    --------
-    >>> demo_function(2)
-    4
-    >>> demo_function(3)
-    6
+    Examples:
+        >>> demo_function(2)
+        4
+        >>> demo_function(3)
+        6
     """
     if isinstance(incoming_int, int) is False:
         raise NotAnIntegerError(type(incoming_int))

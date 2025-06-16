@@ -15,13 +15,14 @@ and deploys the project to [PyPI](https://pypi.org).
 See [Why Hatch?](https://hatch.pypa.io/latest/why/) for more details.
 Refer to [Install Hatch](https://hatch.pypa.io/latest/install/) for instructions on how to install it on your operating system.
 
-Optionally, configure Hatch to keep virtual environments within the project folder:
+Ensure you have Python 3.9 or later installed (this can also be done by hatch, take a look at `hatch python --help`).
 
+````{tip}
+Optionally, configure Hatch to keep virtual environments within the project folder:
 ```bash
 hatch config set dirs.env.virtual .venv
 ```
-
-Ensure you have Python 3.9 or later installed (this can also be done by hatch, take a look at `hatch python --help`).
+````
 
 ### Clone the repository
 
@@ -39,7 +40,7 @@ hatch run qa
 ```
 
 ```{tip}
-You can run `hatch env show` at any time to see the available environments and their features.
+You can run `hatch env show` at any time to see the available environments, their features and scripts.
 ```
 
 ## Code Quality Standards
