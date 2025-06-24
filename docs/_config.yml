@@ -40,10 +40,10 @@ html:
 
 sphinx:
   extra_extensions:
+    - sphinx_github_changelog
     - sphinx.ext.autodoc
     - sphinx.ext.intersphinx
     - sphinx.ext.napoleon
-    - sphinxcontrib.programoutput
   config:
     #https://github.com/executablebooks/jupyter-book/issues/1950#issuecomment-1454801479
     suppress_warnings: ["mystnb.unknown_mime_type"]

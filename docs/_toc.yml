@@ -27,3 +27,4 @@ parts:
       - file: references/further-reading.md
       - file: references/api-reference.rst
       - file: references/how-to-contribute.md
+      - file: references/what-is-new.md
