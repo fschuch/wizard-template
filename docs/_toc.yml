@@ -11,17 +11,17 @@ parts:
       - file: getting-started/use-this-template.md
   - caption: User Guide
     chapters:
-      - file: tooling/index.md
+      - file: user-guide/tooling/index.md
         sections:
-          - file: tooling/pre-commit.md
-          - file: tooling/mypy.md
-          - file: tooling/ruff.md
-          - file: tooling/codespell.md
-          - file: tooling/pytest.md
-          - file: tooling/zizmor.md
-      - file: documentation.md
-      - file: versioning-changelog.md
-      - file: ci-cd.md
+          - file: user-guide/tooling/pre-commit.md
+          - file: user-guide/tooling/mypy.md
+          - file: user-guide/tooling/ruff.md
+          - file: user-guide/tooling/codespell.md
+          - file: user-guide/tooling/pytest.md
+          - file: user-guide/tooling/zizmor.md
+      - file: user-guide/documentation.md
+      - file: user-guide/versioning-changelog.md
+      - file: user-guide/ci-cd.md
   - caption: References
     chapters:
       - file: references/further-reading.md
