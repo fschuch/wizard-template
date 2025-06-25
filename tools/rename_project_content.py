@@ -36,29 +36,38 @@ class GitInfo(NamedTuple):
     username: str
     repo: str
 
-    @classmethod
-    def from_repo_info(cls) -> GitInfo:
-        """
-        Instantiate the class from the repository information.
 
-        >>> GitInfo.from_repo_info() # doctest: +SKIP
-        GitInfo(username='fschuch', repo='wizard-template')
-        """
-        # Run the git command and get the output
-        git_command = ["git", "config", "--get", "remote.origin.url"]
-        git_url = subprocess.check_output(git_command).decode("utf-8").strip()
+def get_git_url() -> str:
+    """Get the git URL from the repository."""
+    git_command = ["git", "config", "--get", "remote.origin.url"]
+    return subprocess.check_output(git_command).decode("utf-8").strip()
 
-        # Use regex to extract the user and repo name
-        match = re.search(r"(\w+\.\w+)[:/](?P<username>.+)/(?P<repo>.+)\.git", git_url)
-        if match:
-            return cls(**match.groupdict())
-        raise ValueError("Could not parse git URL")
+
+def match_git_url(git_url: str) -> GitInfo:
+    """
+    Match a git URL to extract the username and repository name.
+
+    >>> match_git_url("https://github.com/fschuch/wizard-template.git")
+    GitInfo(username='fschuch', repo='wizard-template')
+    >>> match_git_url("git@github.com:fschuch/wizard-template.git")
+    GitInfo(username='fschuch', repo='wizard-template')
+    >>> match_git_url("not-a-repo")
+    Traceback (most recent call last):
+        ...
+    ValueError: Could not parse git URL
+    """
+    match = re.fullmatch(
+        r"(?:https://|git@)[\w.-]+[:/](?P<username>[^/]+)/(?P<repo>[^/]+)\.git", git_url
+    )
+    if match:
+        return GitInfo(**match.groupdict())
+    raise ValueError("Could not parse git URL")
 
 
 def from_repo_info_with_fallback() -> GitInfo:
     """Get the repository information."""
     try:
-        return GitInfo.from_repo_info()
+        return match_git_url(get_git_url())
     except (ValueError, subprocess.CalledProcessError):
         print("Could not parse git URL, please enter the information manually.")
         username = input("Enter your username: ")
