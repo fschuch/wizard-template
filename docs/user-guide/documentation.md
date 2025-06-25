@@ -9,6 +9,5 @@ hatch run docs:serve
 ## Configuration
 
 - Jupyter Book: `_config.yml`, `_toc.yml`
-- Sphinx: `conf.py`
 
 You can add Markdown or reStructuredText files, and use MyST Markdown for advanced features. For more, see the [Jupyter Book documentation](https://jupyterbook.org/en/stable/intro.html) and [Sphinx Book Theme](https://sphinx-book-theme.readthedocs.io/en/stable/index.html).
