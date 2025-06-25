@@ -48,7 +48,7 @@ docs = [
 [project.urls]
 Source = "https://github.com/fschuch/wizard-template"
 Tracker = "https://github.com/fschuch/wizard-template/issues"
-Changelog = "https://github.com/fschuch/wizard-template/blob/main/CHANGELOG.md"
+Changelog = "https://fschuch.github.io/wizard-template/references/what-is-new.html"
 Documentation = "https://fschuch.github.io/wizard-template/"
 
 [project.scripts]
