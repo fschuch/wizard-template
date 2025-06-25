@@ -20,19 +20,19 @@ This is a general-purpose template that aims to provide a magical start to any P
 :::
 
 :::{grid-item-card}
-:link: tooling/index
+:link: user-guide/tooling/index
 :link-type: doc
 :class-header: bg-light
 
 Quality Assurance ✅
 ^^^
 
-Use pre-commit hooks, linters, formatters, and unit tests to ensure your code is clean and consistent.
+Use pre-commit hooks, linters, formatters, and unit tests to ensure your code is up to standard.
 
 :::
 
 :::{grid-item-card}
-:link: documentation
+:link: user-guide/documentation
 :link-type: doc
 :class-header: bg-light
 
@@ -40,30 +40,29 @@ Documentation 📚
 ^^^
 
 Write documentation with Jupyter Book, including API references, interactive tutorials, and more.
-Publish to GitHub Pages.
 
 :::
 
 :::{grid-item-card}
-:link: versioning-changelog
+:link: user-guide/versioning-changelog
 :link-type: doc
 :class-header: bg-light
 
 Versioning/Changelog 📜
 ^^^
 
-Conflict-free versioning and changelog management with git tags, pull request labels and GitHub releases.
+Commitless versioning and changelog management with git tags, pull request labels and GitHub releases.
 :::
 
 :::{grid-item-card}
-:link: ci-cd
+:link: user-guide/ci-cd
 :link-type: doc
 :class-header: bg-light
 
-Automated CI/CD 🛠️
+Automated CI/CD 🚀
 ^^^
 
-Test, build, and publish your package to PyPi.
+Test, build, and publish your package to PyPi. Publish documentation to GitHub Pages.
 :::
 
 :::{grid-item-card}
@@ -71,10 +70,10 @@ Test, build, and publish your package to PyPi.
 :link-type: doc
 :class-header: bg-light
 
-Customizable Content 🎯
+Further Reading 📖
 ^^^
 
-Write MyST Markdown to create enriched documents with publication-quality features.
+Resources and references to help you get the most out of this template.
 :::
 
 ::::
