@@ -54,7 +54,7 @@
    platform darwin -- Python 3.12.7, pytest-8.4.1, pluggy-1.6.0
    configfile: pyproject.toml
    plugins: cov-6.2.1
-   collected 8 items                                                             
+   collected 8 items
 
    src/wizard_template/core.py .                                           [ 12%]
    tests/test_core.py ......                                               [ 87%]
