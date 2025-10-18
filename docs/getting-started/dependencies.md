@@ -2,7 +2,7 @@
 
 ## Python
 
-This template is designed to work with Python 3.9 or later. Ensure you have the correct version installed on your system.
+This template is designed to work with Python 3.10 or later. Ensure you have the correct version installed on your system.
 
 ```{important} Keep an eye on the [Python Developer's Guide: Supported Versions](https://devguide.python.org/versions/#status-of-python-versions) to know which versions are actively supported, adapt your project accordingly, and plan for future upgrades.
 ```
