@@ -15,7 +15,7 @@ and deploys the project to [PyPI](https://pypi.org).
 See [Why Hatch?](https://hatch.pypa.io/latest/why/) for more details.
 Refer to [Install Hatch](https://hatch.pypa.io/latest/install/) for instructions on how to install it on your operating system.
 
-Ensure you have Python 3.9 or later installed (this can also be done by hatch, take a look at `hatch python --help`).
+Ensure you have Python 3.10 or later installed (this can also be done by hatch, take a look at `hatch python --help`).
 
 ````{tip}
 Optionally, configure Hatch to keep virtual environments within the project folder:
@@ -61,7 +61,7 @@ Requests). You can do so by running `hatch run check <hook-id>`, for instance `h
 Some of them are available as scripts as a syntax sugar, like `hatch run lint`,
 `hatch run format`, or `hatch run type`. They check the whole codebase using ruff, ruff-format, and mypy, respectively.
 
-The file [project.toml](https://github.com/fschuch/wizard-template/blob/main/pyproject.toml) includes configuration for some of the tools, so they can be consumed by your IDE as well.
+The file [pyproject.toml](https://github.com/fschuch/wizard-template/blob/main/pyproject.toml) includes configuration for some of the tools, so they can be consumed by your IDE as well.
 The file [.pre-commit-config.yaml](https://github.com/fschuch/wizard-template/blob/main/.pre-commit-config.yaml) includes the configuration for the pre-commit hooks.
 
 The [pytest](https://docs.pytest.org/en/stable/index.html) test suite can be run from the default environment with `hatch run test`
