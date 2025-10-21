@@ -8,7 +8,7 @@ name = "wizard-template"
 description = "A template for a python project containing a package, tests, docs, and CI/CD."
 readme = "README.md"
 license = "MIT"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 authors = [{ name = "fschuch", email = "me@fschuch.com" }]
 classifiers = [
     "Intended Audience :: Developers",
@@ -18,7 +18,7 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
-    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python",
 ]
@@ -123,7 +123,7 @@ features = ["tests", "tests-extra"]
 extended = "test -n auto --reruns 7 --reruns-delay 1 {args}"
 
 [[tool.hatch.envs.test.matrix]]
-python = ["3.9", "3.10", "3.11", "3.12", "3.13"]
+python = ["3.10", "3.11", "3.12", "3.13", "3.14"]
 
 [tool.hatch.envs.docs]
 description = "Documentation environment"
