@@ -31,6 +31,14 @@ This is a general-purpose template that aims to provide a magical start to any P
 
 Check out the documentation for more details on how to use the template and its features: <https://docs.fschuch.com/wizard-template>.
 
+### For AI Assistants
+
+If you're an AI coding assistant (like GitHub Copilot), please read [`.github/copilot-instructions.md`](.github/copilot-instructions.md) for important context about this template, including:
+- First-time setup requirements (running the renaming script)
+- Project management tools (Hatch commands)
+- Quality assurance workflow
+- Development patterns and best practices
+
 ## Copyright and License
 
 © 2023 [Felipe N. Schuch](https://github.com/fschuch).
