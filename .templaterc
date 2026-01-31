@@ -1,0 +1,46 @@
+# Template Synchronization Configuration
+# This file tracks the template source and configuration for syncing updates
+
+[template]
+# The repository URL of the template
+repository = https://github.com/fschuch/wizard-template
+
+# The branch to sync from (usually 'main')
+branch = main
+
+# Last synced commit (automatically updated by template-sync.py)
+last_sync_commit = 
+
+[project]
+# Project-specific variables (customize for your project)
+username = fschuch
+project_name = wizard-template
+
+[sync]
+# Files/directories that are project-specific and should not be overwritten
+# These will be skipped during sync or marked for manual review
+# Use one path per line
+exclude_paths = 
+    src/*/
+    tests/test_*.py
+    .templaterc
+    tools/rename_project_content.py
+
+# Files that should always be synced from template
+# These are typically configuration files that benefit from template updates
+# Use one path per line
+sync_paths = 
+    .github/workflows/*.yaml
+    .github/dependabot.yml
+    .pre-commit-config.yaml
+    pyproject.toml
+    .gitignore
+    .vscode/*
+    docs/*
+
+# Files that need smart merging (dependencies, etc.)
+# The sync tool will attempt to merge these intelligently
+# Use one path per line
+smart_merge_files = 
+    pyproject.toml
+    .pre-commit-config.yaml

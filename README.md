@@ -31,6 +31,36 @@ This is a general-purpose template that aims to provide a magical start to any P
 
 Check out the documentation for more details on how to use the template and its features: <https://docs.fschuch.com/wizard-template>.
 
+## Features
+
+- 🚀 **Quick Start**: Get a fully configured Python project in minutes
+- 🔄 **Template Sync**: Keep your project up-to-date with template improvements
+- 📦 **Automated Updates**: Receive dependabot updates for dependencies, GitHub Actions, and pre-commit hooks
+- ✅ **Quality Assurance**: Pre-configured linting, type checking, and testing
+- 📚 **Documentation**: Automated documentation generation with Jupyter Book
+- 🤖 **CI/CD**: GitHub Actions workflows for testing, building, and deployment
+
+## Keeping Your Project Updated
+
+Projects created from this template can stay synchronized with template improvements using the built-in sync tool:
+
+```bash
+# Preview available updates
+python tools/template-sync.py --dry-run
+
+# Apply template updates
+python tools/template-sync.py
+```
+
+This allows you to receive:
+
+- 📦 Dependabot updates to dependencies
+- 🔧 GitHub Actions workflow improvements  
+- 🎯 Pre-commit hook updates
+- 🛡️ Security patches
+
+See the [Template Sync Guide](docs/template-sync.md) for detailed instructions.
+
 ## Copyright and License
 
 © 2023 [Felipe N. Schuch](https://github.com/fschuch).
