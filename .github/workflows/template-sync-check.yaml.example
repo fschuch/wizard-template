@@ -1,0 +1,139 @@
+name: Check Template Updates
+
+# Optional workflow to periodically check for template updates
+# Uncomment and customize as needed
+
+on:
+  # Check weekly on Monday
+  schedule:
+    - cron: '0 9 * * 1'  # 9 AM UTC every Monday
+
+  # Allow manual trigger
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  check-template-updates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: "3.12"
+
+      - name: Check for template updates
+        id: check
+        run: |
+          python tools/template-sync.py --dry-run > sync-preview.txt 2>&1 || true
+          cat sync-preview.txt
+
+          # Check if updates are available
+          if grep -q "No template updates available" sync-preview.txt; then
+            echo "updates_available=false" >> $GITHUB_OUTPUT
+          else
+            echo "updates_available=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create issue if updates available
+        if: steps.check.outputs.updates_available == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const syncPreview = fs.readFileSync('sync-preview.txt', 'utf8');
+
+            // Check if issue already exists
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ['template-update'],
+              state: 'open'
+            });
+
+            if (issues.data.length > 0) {
+              console.log('Template update issue already exists');
+              return;
+            }
+
+            // Create new issue
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '🧙 Template updates available',
+              labels: ['template-update', 'maintenance'],
+              body: `Template updates are available from wizard-template.
+
+            ## Preview
+
+            \`\`\`
+            ${syncPreview}
+            \`\`\`
+
+            ## How to apply
+
+            Run the following commands to sync with the template:
+
+            \`\`\`bash
+            # Preview changes
+            python tools/template-sync.py --dry-run
+
+            # Apply changes
+            python tools/template-sync.py
+
+            # Test your project
+            hatch run qa
+
+            # Push changes
+            git push
+            \`\`\`
+
+            ## Documentation
+
+            - [Template Sync Guide](docs/template-sync.md)
+            - [Quick Reference](docs/template-sync-quickstart.md)
+
+            This issue was automatically created by the template-sync-check workflow.
+            `
+            });
+
+      - name: Comment on existing issue
+        if: steps.check.outputs.updates_available == 'false'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Find open template update issues
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ['template-update'],
+              state: 'open'
+            });
+
+            if (issues.data.length === 0) {
+              console.log('No open template update issues found');
+              return;
+            }
+
+            // Close the issue if no updates
+            for (const issue of issues.data) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: '✅ No more template updates available. This issue can be closed.'
+              });
+
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                state: 'closed'
+              });
+            }
