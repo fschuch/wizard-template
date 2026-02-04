@@ -72,6 +72,7 @@ TEMPLATE_VARIABLES = [
 EXCLUDE_PATTERNS = {
     ".git",
     ".github/workflows/template-sync-check.yaml.example",
+    ".github/workflows/sync-copier-template.yaml.example",
     "__pycache__",
     "*.pyc",
     ".pytest_cache",
@@ -87,6 +88,8 @@ EXCLUDE_PATTERNS = {
     "docs/template-sync.md",
     "docs/template-sync-quickstart.md",
     "docs/template-sync-examples.md",
+    "docs/copier-template-automation.md",  # Copier automation docs
+    "docs/copier-quickstart.md",  # Copier quickstart docs
     "tests/test_template_sync.py",
     "tools/template-sync.py",
     "tools/generate-copier-template.py",  # Don't include this script
@@ -101,6 +104,7 @@ SKIP_TEMPLATING_PATTERNS = {
     ".jpeg",
     ".gif",
     ".ico",
+    ".github/workflows",  # Skip GitHub Actions workflows to avoid ${{ }} conflicts
 }
 
 
@@ -138,6 +142,9 @@ def should_skip_templating(file_path: Path) -> bool:
     # Specific patterns
     for pattern in SKIP_TEMPLATING_PATTERNS:
         if file_path.name == pattern or file_path.suffix == pattern:
+            return True
+        # Check if in workflows directory
+        if ".github/workflows" in str(file_path) and ".github/workflows" in pattern:
             return True
 
     return False
@@ -230,7 +237,7 @@ def apply_template_variables(content: str, file_path: Path) -> str:
         )
 
     elif file_path.suffix in {".yaml", ".yml"}:
-        # GitHub Actions workflows
+        # YAML files (but not GitHub Actions, those are skipped)
         result = re.sub(
             r"https://github\.com/fschuch/wizard-template",
             "https://github.com/{{ author_name }}/{{ project_name }}",
@@ -306,12 +313,15 @@ project_description:
 # Template options
 _subdirectory: ""
 
-# Tasks to run after generation
+# Only process .jinja files with Jinja templating
+# Other files are copied as-is
+_templates_suffix: ".jinja"
+
+# Tasks to run after generation (optional, users can skip with --skip-tasks)
 _tasks:
   - "git init"
   - "git add ."
   - "git commit -m 'Initial commit from wizard-template'"
-  - "{{ _copier_python }} -m pip install -e '.[tests]' 2>/dev/null || echo 'Skipping pip install'"
 
 # Files to exclude from the template
 _exclude:
@@ -327,10 +337,6 @@ _exclude:
   - "*.egg-info"
   - "dist"
   - "build"
-
-# Jinja extensions
-_jinja_extensions:
-  - jinja2_time.TimeExtension
 
 # Minimum copier version
 _min_copier_version: "9.0.0"
@@ -464,13 +470,15 @@ def copy_template_files(source_dir: Path, output_dir: Path) -> None:
             stats["copied"] += 1
             print(f"  Copied: {relative_path}")
         else:
-            # Text file - apply template transformations
+            # Text file - apply template transformations and add .jinja extension
             try:
                 content = item.read_text(encoding="utf-8")
                 templated_content = apply_template_variables(content, item)
-                output_path.write_text(templated_content, encoding="utf-8")
+                # Add .jinja extension so copier knows to process it
+                jinja_output_path = output_path.parent / (output_path.name + ".jinja")
+                jinja_output_path.write_text(templated_content, encoding="utf-8")
                 stats["templated"] += 1
-                print(f"  Templated: {relative_path}")
+                print(f"  Templated: {relative_path} → {relative_path}.jinja")
             except Exception as e:
                 print(f"  Warning: Could not template {relative_path}: {e}")
                 # Fall back to copying
