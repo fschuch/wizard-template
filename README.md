@@ -34,6 +34,7 @@ Check out the documentation for more details on how to use the template and its 
 ### For AI Assistants
 
 If you're an AI coding assistant (like GitHub Copilot), please read [`.github/copilot-instructions.md`](.github/copilot-instructions.md) for important context about this template, including:
+
 - First-time setup requirements (running the renaming script)
 - Project management tools (Hatch commands)
 - Quality assurance workflow
