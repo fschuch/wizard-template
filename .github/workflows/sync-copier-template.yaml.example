@@ -1,0 +1,123 @@
+name: Sync Copier Template
+
+# This workflow automatically generates and syncs the copier template
+# from the wizard-template repository to wizard-template-copier repository
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'docs/copier-template-automation.md'
+      - 'tools/generate-copier-template.py'
+      - '.github/workflows/sync-copier-template.yaml'
+  workflow_dispatch:
+    inputs:
+      force_sync:
+        description: 'Force sync even if no changes detected'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout wizard-template
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          path: wizard-template
+          fetch-depth: 0
+
+      - name: Checkout copier template repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          repository: fschuch/wizard-template-copier
+          token: ${{ secrets.COPIER_TEMPLATE_TOKEN }}
+          path: wizard-template-copier
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: "3.12"
+
+      - name: Generate copier template
+        run: |
+          cd wizard-template
+          python tools/generate-copier-template.py --output-dir ../wizard-template-copier-new
+          echo "Generation complete"
+
+      - name: Sync copier repository
+        id: sync
+        run: |
+          # Remove old content (except .git and README-COPIER.md)
+          cd wizard-template-copier
+          find . -mindepth 1 -maxdepth 1 \
+            -not -name .git \
+            -not -name README-COPIER.md \
+            -exec rm -rf {} + 2>/dev/null || true
+          
+          # Copy new content
+          cd ../wizard-template-copier-new
+          cp -r * ../wizard-template-copier/ 2>/dev/null || true
+          cp -r .* ../wizard-template-copier/ 2>/dev/null || true
+          
+          # Move README-COPIER.md to README.md if it exists
+          cd ../wizard-template-copier
+          if [ -f README-COPIER.md ]; then
+            mv README-COPIER.md README.md
+          fi
+          
+          echo "Sync complete"
+
+      - name: Commit and push changes
+        run: |
+          cd wizard-template-copier
+          
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Add all changes
+          git add -A
+          
+          # Check if there are changes
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+            echo "changes_made=false" >> $GITHUB_OUTPUT
+          else
+            # Commit with reference to source commit
+            COMMIT_MSG="chore: auto-sync from wizard-template
+
+Generated from wizard-template @ ${{ github.sha }}
+Ref: https://github.com/fschuch/wizard-template/commit/${{ github.sha }}"
+            
+            git commit -m "$COMMIT_MSG"
+            git push
+            
+            echo "changes_made=true" >> $GITHUB_OUTPUT
+            echo "✅ Changes committed and pushed to copier template repository"
+          fi
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "### Copier Template Sync" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Source**: wizard-template @ ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Target**: wizard-template-copier" >> $GITHUB_STEP_SUMMARY
+          
+          cd wizard-template-copier
+          if git diff HEAD~1 --quiet 2>/dev/null; then
+            echo "- **Status**: ✅ No changes (already synced)" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- **Status**: ✅ Synced successfully" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "#### Changes" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            git diff HEAD~1 --stat 2>/dev/null || echo "First commit" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          fi

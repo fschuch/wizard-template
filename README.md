@@ -31,6 +31,41 @@ This is a general-purpose template that aims to provide a magical start to any P
 
 Check out the documentation for more details on how to use the template and its features: <https://docs.fschuch.com/wizard-template>.
 
+## Using This Template
+
+You can use this template in two ways:
+
+### Option 1: Copier (Recommended for new projects)
+
+Use [Copier](https://copier.readthedocs.io/) for interactive project creation with automatic variable substitution:
+
+```bash
+# Install copier
+pip install copier
+
+# Create a new project (will be available after setup)
+copier copy https://github.com/fschuch/wizard-template-copier my-project
+```
+
+**Benefits**: Interactive prompts, easy updates, smart conflict resolution
+
+See [Copier Quick Start](docs/copier-quickstart.md) for setup instructions.
+
+### Option 2: GitHub Template
+
+Use GitHub's "Use this template" button to create a new repository, then manually customize:
+
+1. Click "Use this template" on GitHub
+2. Create your new repository
+3. Clone and run customization script:
+   ```bash
+   git clone https://github.com/yourusername/your-project
+   cd your-project
+   python tools/rename_project_content.py
+   ```
+
+**Benefits**: Simple GitHub integration, full control
+
 ## Features
 
 - 🚀 **Quick Start**: Get a fully configured Python project in minutes
