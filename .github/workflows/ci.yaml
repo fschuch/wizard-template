@@ -8,12 +8,6 @@ on:
       - "main"
       - "release/**"
   pull_request:
-    paths:
-      - .github/workflows/ci.yaml
-      - .pre-commit-config.yaml
-      - pyproject.toml
-      - tests/**
-      - src/**
   schedule:
     - cron: "0 0 * * 1" # midnight every Monday
 

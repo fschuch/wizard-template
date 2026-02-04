@@ -161,7 +161,7 @@ To create a new release, follow these steps:
 
 - Create a new release from GitHub: <https://github.com/fschuch/wizard-template/releases>
 
-  - Based on previous versions, choose the next version number according to the [EffVer](https://jacobtomlinson.dev/effver/) scheme. The tag matching pattern is set to `v*.*.*`, for instance, `v1.2.3`, , `v2.3.4a0`, , `v2.3.4b0`, `v2.3.4rc0`.
+  - Based on previous versions, choose the next version number according to the [EffVer](https://jacobtomlinson.dev/effver/) scheme. The tag matching pattern is set to `v*.*.*`, for instance, `v1.2.3`, `v2.3.4a0`, `v2.3.4b0`, `v2.3.4rc0`.
   - Choose to create a new tag on publish based on version from previous step.
   - Click on Generate Release Notes. Modify the release notes as needed.
   - Double-check if the new version number is appropriate for the given set of changes.

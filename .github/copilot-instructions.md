@@ -5,6 +5,7 @@ This file provides context for AI coding assistants (like GitHub Copilot) workin
 ## Template Overview
 
 This is a Python project template that includes:
+
 - Modern Python package structure using `src` layout
 - Automated testing with pytest
 - Code quality tools (ruff, mypy, pre-commit)
@@ -21,6 +22,7 @@ hatch run _wizard
 ```
 
 This script:
+
 - Replaces all references to `wizard-template` with your project name
 - Replaces all references to `fschuch` with your username
 - Renames the `src/wizard_template` directory to your project name
@@ -80,16 +82,19 @@ hatch config set dirs.env.virtual .venv
 ## Quality Assurance Tools
 
 ### Linting & Formatting
+
 - **Ruff**: Fast Python linter and formatter (replaces flake8, black, isort)
   - Configured in `pyproject.toml` under `[tool.ruff]`
   - Convention: Google-style docstrings
 
 ### Type Checking
+
 - **MyPy**: Static type checker for Python
   - Configured in `pyproject.toml` under `[tool.mypy]`
   - Type hints are expected in all new code
 
 ### Testing
+
 - **Pytest**: Testing framework
   - Tests located in `tests/` directory
   - Run with `hatch run test`
@@ -97,6 +102,7 @@ hatch config set dirs.env.virtual .venv
   - Doctests are enabled for all Python files
 
 ### Pre-commit Hooks
+
 - Configured in `.pre-commit-config.yaml`
 - Includes: ruff, mypy, codespell, file checks, mdformat, nbstripout, zizmor
 - Install with `hatch run pre-commit-install`
@@ -132,15 +138,16 @@ hatch config set dirs.env.virtual .venv
 ### Making Changes
 
 1. Create a new branch for your changes
-2. Make your code changes
-3. Add/update tests as needed
-4. Run QA checks: `hatch run qa`
-5. Commit your changes
-6. Push and create a pull request
+1. Make your code changes
+1. Add/update tests as needed
+1. Run QA checks: `hatch run qa`
+1. Commit your changes
+1. Push and create a pull request
 
 ### Adding Dependencies
 
 Add dependencies to `pyproject.toml` under:
+
 - `dependencies` for runtime dependencies
 - `project.optional-dependencies.tests` for test dependencies
 - `project.optional-dependencies.docs` for documentation dependencies
@@ -161,10 +168,10 @@ This template includes several GitHub Actions workflows:
 ### Adding a New Module
 
 1. Create new file in `src/wizard_template/` (or your renamed package)
-2. Add type hints to all functions
-3. Add Google-style docstrings
-4. Create corresponding test file in `tests/`
-5. Ensure coverage stays above 90%
+1. Add type hints to all functions
+1. Add Google-style docstrings
+1. Create corresponding test file in `tests/`
+1. Ensure coverage stays above 90%
 
 ### Adding Tests
 
@@ -184,6 +191,7 @@ This template includes several GitHub Actions workflows:
 ## Versioning
 
 This project uses:
+
 - **EffVer** (Effort-based Versioning) for version scheme
 - **hatch-vcs** for automatic version management from git tags
 - Version is automatically generated from git tags
@@ -191,13 +199,13 @@ This project uses:
 ## Important Notes for AI Assistants
 
 1. **Always run the renaming script first** when working with a new project from this template
-2. **Use `hatch run` prefix** for all project commands, not direct pip/pytest/etc.
-3. **Maintain 90% test coverage** - add tests for new code
-4. **Follow Google docstring convention** for all docstrings
-5. **Add type hints** to all new functions and methods
-6. **Run `hatch run qa`** before committing to ensure all checks pass
-7. **Keep the wizard badge** in README.md - it shows the project was created from this template
-8. **Do not commit** `__pycache__`, `.venv`, `build/`, or other build artifacts
+1. **Use `hatch run` prefix** for all project commands, not direct pip/pytest/etc.
+1. **Maintain 90% test coverage** - add tests for new code
+1. **Follow Google docstring convention** for all docstrings
+1. **Add type hints** to all new functions and methods
+1. **Run `hatch run qa`** before committing to ensure all checks pass
+1. **Keep the wizard badge** in README.md - it shows the project was created from this template
+1. **Do not commit** `__pycache__`, `.venv`, `build/`, or other build artifacts
 
 ## Getting Help
 
