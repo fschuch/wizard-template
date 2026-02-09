@@ -1,0 +1,44 @@
+version: 1
+project:
+  title: The Wizard Template for Python Projects
+  authors:
+    - name: Felipe N. Schuch
+  copyright: '2023'
+  github: fschuch/wizard-template
+  bibliography:
+    - references.bib
+  exports:
+    - format: pdf
+      template: plain_latex_book
+      output: exports/book.pdf
+  toc:
+    - file: intro.md
+    - title: Getting Started
+      children:
+        - file: getting-started/about.md
+        - file: getting-started/dependencies.md
+        - file: getting-started/use-this-template.md
+    - title: User Guide
+      children:
+        - file: user-guide/tooling/index.md
+          children:
+            - file: user-guide/tooling/pre-commit.md
+            - file: user-guide/tooling/mypy.md
+            - file: user-guide/tooling/ruff.md
+            - file: user-guide/tooling/codespell.md
+            - file: user-guide/tooling/pytest.md
+            - file: user-guide/tooling/zizmor.md
+        - file: user-guide/documentation.md
+        - file: user-guide/versioning-changelog.md
+        - file: user-guide/ci-cd.md
+    - title: References
+      children:
+        - file: references/further-reading.md
+        - file: references/api-reference.rst
+        - file: references/how-to-contribute.md
+        - file: references/what-is-new.md
+site:
+  options:
+    logo: logo.png
+    folders: true
+  template: book-theme
