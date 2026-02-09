@@ -37,8 +37,6 @@ jobs:
         uses: pypa/hatch@257e27e51a6a5616ed08a39a408a21c35c9931bc
 
       - name: Build the book
-        env:
-          SPHINX_GITHUB_CHANGELOG_TOKEN: ${{ github.token }}
         run: hatch run docs:build
 
       - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
@@ -63,4 +61,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4.0.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: build/_build/html
+          publish_dir: build/html
