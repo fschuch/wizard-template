@@ -3,7 +3,7 @@ project:
   title: The Wizard Template for Python Projects
   authors:
     - name: Felipe N. Schuch
-  copyright: '2023'
+  copyright: '2023-2026'
   github: fschuch/wizard-template
   exports:
     - format: pdf
