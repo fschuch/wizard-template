@@ -5,8 +5,6 @@ project:
     - name: Felipe N. Schuch
   copyright: '2023'
   github: fschuch/wizard-template
-  bibliography:
-    - references.bib
   exports:
     - format: pdf
       template: plain_latex_book
@@ -34,7 +32,7 @@ project:
     - title: References
       children:
         - file: references/further-reading.md
-        - file: references/api-reference.rst
+        - file: references/api-reference.md
         - file: references/how-to-contribute.md
         - file: references/what-is-new.md
 site:
