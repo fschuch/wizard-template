@@ -245,7 +245,7 @@ If your AI assistant doesn't seem to be using the skill:
 
 If you want to use the skill in repositories that don't include it:
 
-- Install at user-level (see [Installation Options](#option-2-user-level-personal) above)
+- Install at user-level (see Installation Options section above, Option 2)
 - Or copy the skill directory to your project
 
 ### Skill Conflicts
@@ -259,8 +259,8 @@ If you have multiple skills with similar guidance:
 ## Learn More
 
 - [GitHub Copilot Agent Skills Documentation](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills)
-- [Wizard-Template Agent Skill README](./.../../.agents/skills/python-wizard-template/README.md)
-- [Copilot Instructions](./../.github/copilot-instructions.md)
+- Wizard-Template Agent Skill README (in `.agents/skills/python-wizard-template/README.md`)
+- Copilot Instructions (in `.github/copilot-instructions.md`)
 
 ## Contributing to the Skill
 
