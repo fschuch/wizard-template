@@ -33,12 +33,16 @@ Check out the documentation for more details on how to use the template and its 
 
 ### For AI Assistants
 
-If you're an AI coding assistant (like GitHub Copilot), please read [`.github/copilot-instructions.md`](.github/copilot-instructions.md) for important context about this template, including:
+This template includes an [Agent Skill](.agents/skills/python-wizard-template/) that teaches AI assistants (like GitHub Copilot) how to work effectively with wizard-template projects. The skill provides comprehensive guidance for:
 
-- First-time setup requirements (running the renaming script)
-- Project management tools (Hatch commands)
-- Quality assurance workflow
-- Development patterns and best practices
+- **New projects**: Starting fresh from the template
+- **Migration**: Applying template structure to existing projects
+- **Updates**: Incorporating template changes into your project
+- **Best practices**: Following wizard-template conventions
+
+AI assistants will automatically use this skill when working in repositories created from this template. You can also [install it at user-level](.agents/skills/python-wizard-template/README.md#installation-options) to use across all your projects.
+
+Additionally, [`.github/copilot-instructions.md`](.github/copilot-instructions.md) provides quick reference context for everyday development tasks.
 
 ## Copyright and License
 
