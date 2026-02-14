@@ -4,8 +4,10 @@ set -e
 echo "🚀 Starting post-create setup..."
 
 # Install pyenv for managing multiple Python versions
+# Note: pyenv-installer is the official pyenv installation method
+# See: https://github.com/pyenv/pyenv-installer
 echo "📦 Installing pyenv..."
-curl https://pyenv.run | bash
+curl -fsSL https://pyenv.run | bash
 
 # Add pyenv to PATH for this script
 export PYENV_ROOT="$HOME/.pyenv"
