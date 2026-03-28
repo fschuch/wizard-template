@@ -12,6 +12,9 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: "jupyter-book"
+        update-types: ["version-update:semver-major"]
     groups:
       pip-dependencies:
         patterns:

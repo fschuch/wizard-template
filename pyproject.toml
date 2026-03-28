@@ -33,16 +33,16 @@ tests = [
     "pytest>=8.2.2",
 ]
 tests-extra = [
-    "pytest-randomly==3.16.0",
-    "pytest-rerunfailures==15.1",
+    "pytest-randomly==4.0.1",
+    "pytest-rerunfailures==16.1",
     "pytest-xdist==3.8.0",
 ]
 docs = [
-    "docutils==0.21.2",
-    "jupyter-book==1.0.4.post1",
+    "docutils==0.21.2,<0.22",
+    "jupyter-book==1.0.4.post1,<2.0",
     "sphinx-autobuild==2024.10.3",
-    "sphinx==7.4.7",
-    "sphinx-github-changelog==1.7.1",
+    "sphinx==7.4.7,<8.0",
+    "sphinx-github-changelog==1.7.2",
 ]
 
 [project.urls]
