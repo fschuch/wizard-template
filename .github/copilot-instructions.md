@@ -1,6 +1,8 @@
 # AI Agent Context for Wizard Template
 
-This file provides context for AI coding assistants (like GitHub Copilot) working with projects created from this template.
+This file provides quick reference context for AI coding assistants (like GitHub Copilot) working with projects created from this template.
+
+**For comprehensive guidance including migration and updates, see the [Agent Skill](../.agents/skills/python-wizard-template/SKILL.md) in `.agents/skills/python-wizard-template/`.**
 
 ## Template Overview
 
