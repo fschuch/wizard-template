@@ -31,6 +31,25 @@ This is a general-purpose template that aims to provide a magical start to any P
 
 Check out the documentation for more details on how to use the template and its features: <https://docs.fschuch.com/wizard-template>.
 
+## Quick Start
+
+### Using Dev Container (Recommended)
+
+The easiest way to get started is using the provided VS Code dev container:
+
+1. Install [Docker](https://docs.docker.com/get-docker/) and [VS Code](https://code.visualstudio.com/)
+2. Install the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+3. Open this project in VS Code
+4. Click "Reopen in Container" when prompted (or use Command Palette: "Dev Containers: Reopen in Container")
+
+The dev container includes:
+- **Hatch**: Pre-installed and configured
+- **Multiple Python versions**: 3.10, 3.11, 3.12, 3.13, and 3.14 (via pyenv)
+- **Pre-configured tools**: All linting, formatting, and testing tools ready to use
+- **VS Code extensions**: Python development extensions pre-installed
+
+See [`.devcontainer/README.md`](.devcontainer/README.md) for more details.
+
 ### For AI Assistants
 
 If you're an AI coding assistant (like GitHub Copilot), please read [`.github/copilot-instructions.md`](.github/copilot-instructions.md) for important context about this template, including:
