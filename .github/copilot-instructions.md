@@ -12,6 +12,7 @@ This is a Python project template that includes:
 - Documentation with Jupyter Book
 - CI/CD workflows with GitHub Actions
 - Project management with Hatch
+- VS Code dev container with multi-version Python support
 
 ## First-Time Setup (CRITICAL)
 
@@ -29,6 +30,24 @@ This script:
 - Removes itself after completion
 
 **Do not skip this step** - it must be run immediately after cloning a new project from this template.
+
+## Development Environment
+
+### Dev Container (Recommended)
+
+This project includes a VS Code dev container configuration (`.devcontainer/`) that provides:
+
+- **Hatch**: Pre-installed via pipx
+- **Multiple Python versions**: Python 3.10, 3.11, 3.12, 3.13, and 3.14 (managed via pyenv)
+- **Pre-configured VS Code**: Extensions and settings for Python development
+- **Automatic setup**: Post-create script installs all Python versions and pre-commit hooks
+
+To use the dev container:
+1. Open the project in VS Code
+2. Click "Reopen in Container" when prompted
+3. Wait for the container to build and setup to complete
+
+See `.devcontainer/README.md` for detailed information about the dev container configuration.
 
 ## Project Management Tool: Hatch
 

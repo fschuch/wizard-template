@@ -1,5 +1,44 @@
 # How to use this Template
 
+## Option 1: Using Dev Container (Recommended)
+
+The easiest way to get started is using the VS Code dev container:
+
+1. Create your project by clicking on [Use this template](https://github.com/new?template_name=wizard-template&template_owner=fschuch) to generate a new repository from this template.
+
+1. Clone your repository:
+
+   ```bash
+   git clone <your-repo-url>
+   cd <your-repo-name>
+   ```
+
+1. Open the project in VS Code with the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) installed.
+
+1. Click "Reopen in Container" when prompted (or use Command Palette: "Dev Containers: Reopen in Container").
+
+1. Wait for the container to build and the post-create script to complete. This will:
+   - Install Hatch
+   - Install Python versions 3.10, 3.11, 3.12, 3.13, and 3.14
+   - Install pre-commit hooks
+   - Configure the development environment
+
+1. Run the renaming script to customize your project:
+
+   ```bash
+   hatch run _wizard
+   ```
+
+1. Verify everything is working:
+
+   ```bash
+   hatch run qa
+   ```
+
+See [`.devcontainer/README.md`](https://github.com/fschuch/wizard-template/blob/main/.devcontainer/README.md) for more details about the dev container configuration.
+
+## Option 2: Manual Setup
+
 1. Create your project by clicking on [Use this template](https://github.com/new?template_name=wizard-template&template_owner=fschuch) to generate a new repository from this template. Choose a name for your project, and optionally, a description. Ensure to mark the repository as public or private according to your needs.
 
    ````{note}
