@@ -22,6 +22,7 @@ parts:
       - file: user-guide/documentation.md
       - file: user-guide/versioning-changelog.md
       - file: user-guide/ci-cd.md
+      - file: user-guide/agent-skills.md
   - caption: References
     chapters:
       - file: references/further-reading.md
